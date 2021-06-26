@@ -1,0 +1,257 @@
+@prefix : <http://coolfutures.net/rdf/Design_Conjectures#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://coolfutures.net/rdf/Design_Conjectures/> .
+
+<http://coolfutures.net/rdf/Design_Conjectures/> rdf:type owl:Ontology ;
+                                                  rdfs:comment "Initial work on an ontology for design conjecture claims."@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures#hasCondition
+:hasCondition rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Conjecture ;
+              rdfs:comment "A conjecture has one or more conditions"@en ;
+              rdfs:seeAlso "hasConsequence"@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#hasConsequence
+:hasConsequence rdf:type owl:ObjectProperty ;
+                rdfs:domain :Conjecture .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#hasEmbodiment
+:hasEmbodiment rdf:type owl:ObjectProperty ;
+               rdfs:domain :PedagogyConjecture ;
+               rdfs:range :DesignFeature ;
+               rdfs:comment "A PedagogicalConjecture has one or more DesignFeatures."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#hasPedagogy
+:hasPedagogy rdf:type owl:ObjectProperty ;
+             rdfs:domain :DesignFeature ,
+                         :LearningDesign ;
+             rdfs:range :PedagogyConjecture ;
+             rdfs:comment "A LearningDesign and a DesignFeature should have a (high level) pedagogy conjecture."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#hasWarrant
+:hasWarrant rdf:type owl:ObjectProperty ,
+                     owl:TransitiveProperty ;
+            rdfs:domain :Conjecture ;
+            rdfs:comment "A conjecture should have some warrant. The warrant  can be from data or from analogy. The range is some entity that functions as a data source (e.g, a study) or as an analogical case."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#hasWarrantFromData
+:hasWarrantFromData rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :hasWarrant ;
+                    owl:propertyDisjointWith :hasWarrentFromAnalogy .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#hasWarrentFromAnalogy
+:hasWarrentFromAnalogy rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :hasWarrant .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#isMeasureFor
+:isMeasureFor rdf:type owl:ObjectProperty ;
+              owl:inverseOf :isMeasuredBy ;
+              rdfs:domain :Measure ;
+              rdfs:comment "A measure can be for some Outcome and for some MediatingProcess and for some LearningConjecture."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#isMeasuredBy
+:isMeasuredBy rdf:type owl:ObjectProperty ;
+              rdfs:range :Measure .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures#ID
+:ID rdf:type owl:DatatypeProperty ,
+             owl:FunctionalProperty ;
+    rdfs:range xsd:string ;
+    rdfs:comment "a unique identifier"^^rdfs:Literal .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#creator
+:creator rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:range xsd:string ;
+         rdfs:comment "The creator of an instance. Together with the ID this makes for an unique identifier, likely"^^rdfs:Literal .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures#AttitudeOutcome
+:AttitudeOutcome rdf:type owl:Class ;
+                 rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Conjecture
+:Conjecture rdf:type owl:Class .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#DesignConjecture
+:DesignConjecture rdf:type owl:Class ;
+                  rdfs:subClassOf :Conjecture ;
+                  rdfs:comment "A conjecture about how a design feature affects behavior and the production of some artefact(s)."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#DesignFeature
+:DesignFeature rdf:type owl:Class ;
+               rdfs:comment "DesignFeature is what Sandoval calls Embodiment."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#DiscoursePractice
+:DiscoursePractice rdf:type owl:Class ;
+                   rdfs:subClassOf :DesignFeature .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#LearningConjecture
+:LearningConjecture rdf:type owl:Class ;
+                    rdfs:subClassOf :Conjecture ;
+                    rdfs:comment "A conjecture about how a mediating process affects learning."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#LearningDesign
+:LearningDesign rdf:type owl:Class ;
+                rdfs:comment "A learnining design about which we are going to make conjectures."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#LearningOutcome
+:LearningOutcome rdf:type owl:Class ;
+                 rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Material
+:Material rdf:type owl:Class ;
+          rdfs:subClassOf :DesignFeature .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Measure
+:Measure rdf:type owl:Class .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#MediatingProcess
+:MediatingProcess rdf:type owl:Class .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#MotivationOutcome
+:MotivationOutcome rdf:type owl:Class ;
+                   rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Observable
+:Observable rdf:type owl:Class ;
+            rdfs:subClassOf :MediatingProcess .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#ObservableBehavior
+:ObservableBehavior rdf:type owl:Class ;
+                    rdfs:subClassOf :Observable .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#ObservableInteraction
+:ObservableInteraction rdf:type owl:Class ;
+                       rdfs:subClassOf :Observable .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Observation
+:Observation rdf:type owl:Class ;
+             rdfs:subClassOf :Measure .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Outcome
+:Outcome rdf:type owl:Class .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#ParticipantArtifact
+:ParticipantArtifact rdf:type owl:Class ;
+                     rdfs:subClassOf :MediatingProcess .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#ParticipantStructure
+:ParticipantStructure rdf:type owl:Class ;
+                      rdfs:subClassOf :DesignFeature .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#PedagogyConjecture
+:PedagogyConjecture rdf:type owl:Class ;
+                    rdfs:subClassOf :Conjecture ;
+                    rdfs:comment "High level conjecture about how to support learning in some context. (What Sandoval calls a high level conjecture.)"@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Scale
+:Scale rdf:type owl:Class ;
+       rdfs:subClassOf :Measure .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#SocialOutcome
+:SocialOutcome rdf:type owl:Class ;
+               rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#TaskStructure
+:TaskStructure rdf:type owl:Class ;
+               rdfs:subClassOf :DesignFeature .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#Tool
+:Tool rdf:type owl:Class ;
+      rdfs:subClassOf :DesignFeature .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures#scale_demo
+:scale_demo rdf:type owl:NamedIndividual ,
+                     :Scale ;
+            :ID "scale001"^^xsd:string ;
+            :creator "Peter Reimann"^^xsd:string .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AttitudeOutcome
+                :LearningOutcome
+                :MotivationOutcome
+                :SocialOutcome
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :DesignConjecture
+                :LearningConjecture
+                :PedagogyConjecture
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :DiscoursePractice
+                :Material
+                :ParticipantStructure
+                :TaskStructure
+                :Tool
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
