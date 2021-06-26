@@ -4,10 +4,10 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://coolfutures.net/rdf/Design_Conjectures/> .
+@base <http://coolfutures.net/rdf/Design_Conjectures/dcon#> .
 
-<http://coolfutures.net/rdf/Design_Conjectures/> rdf:type owl:Ontology ;
-                                                  rdfs:comment "Initial work on an ontology for design conjecture claims."@en .
+<http://coolfutures.net/rdf/Design_Conjectures/dcon#> rdf:type owl:Ontology ;
+                                                       rdfs:comment "Initial work on an ontology for design conjecture claims."@en .
 
 #################################################################
 #    Object Properties
@@ -126,7 +126,7 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#LearningDesign
 :LearningDesign rdf:type owl:Class ;
-                rdfs:comment "A learnining design about which we are going to make conjectures."@en .
+                rdfs:comment "A learnining design about which we are going to make conjectures. It is addressing an instructional challenge"@en .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#LearningOutcome
