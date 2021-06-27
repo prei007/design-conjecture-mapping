@@ -4,10 +4,20 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://coolfutures.net/rdf/Design_Conjectures/dcon#> .
+@base <http://www.coolfutures.net/rdf/Design_Conjectures/dcon#> .
 
-<http://coolfutures.net/rdf/Design_Conjectures/dcon#> rdf:type owl:Ontology ;
-                                                       rdfs:comment "Initial work on an ontology for design conjecture claims."@en .
+<http://www.coolfutures.net/rdf/Design_Conjectures/dcon#> rdf:type owl:Ontology ;
+                                                           <http://purl.org/dc/terms/creator> "Peter Reimann"^^xsd:string ;
+                                                           rdfs:comment "Initial work on an ontology for design conjecture claims."@en ;
+                                                           owl:versionInfo "version 1.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
 
 #################################################################
 #    Object Properties
@@ -212,6 +222,15 @@
       rdfs:subClassOf :DesignFeature .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#InstructionalChallenge
+:InstructionalChallenge rdf:type owl:Class .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#MeasurementConjecture
+:MeasurementConjecture rdf:type owl:Class ;
+                       rdfs:subClassOf :Conjecture .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -240,6 +259,7 @@
   owl:members ( :DesignConjecture
                 :LearningConjecture
                 :PedagogyConjecture
+                :MeasurementConjecture
               )
 ] .
 
