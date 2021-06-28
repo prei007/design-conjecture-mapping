@@ -142,17 +142,20 @@
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Backing
 :Backing rdf:type owl:Class ;
-         rdfs:subClassOf :I-Node .
+         rdfs:subClassOf :I-Node ;
+         rdfs:comment "The backing supports the warrant; it acts as evidence for the warrant."^^xsd:string .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim
 :Claim rdf:type owl:Class ;
-       rdfs:subClassOf :I-Node .
+       rdfs:subClassOf :I-Node ;
+       rdfs:comment "The assertion that the argument backs."^^xsd:string .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Data
 :Data rdf:type owl:Class ;
-      rdfs:subClassOf :I-Node .
+      rdfs:subClassOf :I-Node ;
+      rdfs:comment "The evidence (e.g. fact, an example, statistics) that supports the claim."^^xsd:string .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#I-Node
@@ -162,7 +165,8 @@
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Qualifier
 :Qualifier rdf:type owl:Class ;
-           rdfs:subClassOf :I-Node .
+           rdfs:subClassOf :I-Node ;
+           rdfs:comment "Qualiﬁes the conditions under which the argument holds."^^xsd:string .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#QualifierApplication
@@ -178,7 +182,8 @@
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Rebuttal
 :Rebuttal rdf:type owl:Class ;
-          rdfs:subClassOf :I-Node .
+          rdfs:subClassOf :I-Node ;
+          rdfs:comment "A rebuttal is an argument that might be made against the claim"^^xsd:string .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#RebuttalApplication
@@ -193,18 +198,66 @@
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#ToulminArgument
 :ToulminArgument rdf:type owl:Class ;
-                 owl:equivalentClass [ rdf:type owl:Restriction ;
-                                       owl:onProperty :hasClaim ;
-                                       owl:cardinality "1"^^xsd:nonNegativeInteger
+                 owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasBacking ;
+                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Backing
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasData ;
+                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Data
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasClaim ;
+                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Claim
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasQualifier ;
+                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Qualifier
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasWarrant ;
+                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Warrant
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
                                      ] ;
-                 rdfs:comment "An argument must have exactly one claim"^^xsd:string .
+                 rdfs:comment "An argument must have exactly one claim, Warrant, and Qualifier, and minimally one Data and 1 Backing."^^xsd:string .
 
 [ rdf:type owl:Axiom ;
    owl:annotatedSource :ToulminArgument ;
    owl:annotatedProperty owl:equivalentClass ;
-   owl:annotatedTarget [ rdf:type owl:Restriction ;
-                         owl:onProperty :hasClaim ;
-                         owl:cardinality "1"^^xsd:nonNegativeInteger
+   owl:annotatedTarget [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                owl:onProperty :hasBacking ;
+                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :Backing
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :hasData ;
+                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :Data
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :hasClaim ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :Claim
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :hasQualifier ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :Qualifier
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :hasWarrant ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :Warrant
+                                              ]
+                                            ) ;
+                         rdf:type owl:Class
                        ] ;
    rdfs:comment "Check this because constraint does not catch the two claims for _Argument01."^^xsd:string
  ] .
@@ -222,7 +275,11 @@
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Argument01
 :_Argument01 rdf:type owl:NamedIndividual ,
                       :ToulminArgument ;
-             :hasClaim :_Claim02 .
+             :hasBacking :_Backing01 ;
+             :hasClaim :_Claim01 ;
+             :hasData :_Data01 ;
+             :hasQualifier :_Qualifier01 ;
+             :hasRebuttal :_Rebuttal01 .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Backing01
@@ -253,6 +310,12 @@
 :_Qualifier01 rdf:type owl:NamedIndividual ,
                        :Qualifier ;
               :text "Provided that learners have a verbal intelligence score > 90"^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Qualifier02
+:_Qualifier02 rdf:type owl:NamedIndividual ,
+                       :Qualifier ;
+              :text "Only applies when numerical intelligence GT 110"^^xsd:string .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Rebuttal01
@@ -286,6 +349,13 @@
 [ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( :_Claim01
                         :_Claim02
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :_Qualifier01
+                        :_Qualifier02
                       )
 ] .
 
