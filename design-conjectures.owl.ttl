@@ -173,6 +173,18 @@
             rdfs:comment "Backing from experience of teacher with similar designs"^^xsd:string .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures#_Claim01
+:_Claim01 rdf:type owl:NamedIndividual ,
+                   <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> ;
+          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text of _Claim01"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#_Claim02
+:_Claim02 rdf:type owl:NamedIndividual ,
+                   <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> ;
+          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text of _Claim02"^^xsd:string .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Claim03
 :_Claim03 rdf:type owl:NamedIndividual ;
           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Keeping  a reflection journal will increase the number of reflections"^^xsd:string ;
@@ -242,21 +254,12 @@
                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim02 .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Claim01
-:_Claim01 rdf:type owl:NamedIndividual ,
-                   <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> ;
-          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text of _Claim01"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Claim02
-:_Claim02 rdf:type owl:NamedIndividual ,
-                   <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> ;
-          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text of _Claim02"^^xsd:string .
-
-
 #################################################################
 #    Annotations
 #################################################################
+
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TArgument01> rdfs:comment "A Toulmin style argument, hence the T"^^xsd:string .
+
 
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#creator> rdfs:comment "One or more people who have created or contributed."^^xsd:string .
 
