@@ -7,9 +7,10 @@
 @base <http://www.coolfutures.net/rdf/Design_Conjectures/dcon#> .
 
 <http://www.coolfutures.net/rdf/Design_Conjectures/dcon#> rdf:type owl:Ontology ;
+                                                           owl:imports <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#> ;
                                                            <http://purl.org/dc/terms/creator> "Peter Reimann"^^xsd:string ;
                                                            rdfs:comment "Initial work on an ontology for design conjecture claims."@en ;
-                                                           owl:versionInfo "version 1.0" .
+                                                           owl:versionInfo "version 1.0"^^xsd:string .
 
 #################################################################
 #    Annotation properties
@@ -82,24 +83,6 @@
 
 
 #################################################################
-#    Data properties
-#################################################################
-
-###  http://coolfutures.net/rdf/Design_Conjectures#ID
-:ID rdf:type owl:DatatypeProperty ,
-             owl:FunctionalProperty ;
-    rdfs:range xsd:string ;
-    rdfs:comment "a unique identifier"^^rdfs:Literal .
-
-
-###  http://coolfutures.net/rdf/Design_Conjectures#creator
-:creator rdf:type owl:DatatypeProperty ,
-                  owl:FunctionalProperty ;
-         rdfs:range xsd:string ;
-         rdfs:comment "The creator of an instance. Together with the ID this makes for an unique identifier, likely"^^rdfs:Literal .
-
-
-#################################################################
 #    Classes
 #################################################################
 
@@ -114,7 +97,8 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#DesignConjecture
 :DesignConjecture rdf:type owl:Class ;
-                  rdfs:subClassOf :Conjecture ;
+                  rdfs:subClassOf :Conjecture ,
+                                  <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#ToulminArgument> ;
                   rdfs:comment "A conjecture about how a design feature affects behavior and the production of some artefact(s)."@en .
 
 
@@ -128,9 +112,14 @@
                    rdfs:subClassOf :DesignFeature .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures#InstructionalChallenge
+:InstructionalChallenge rdf:type owl:Class .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures#LearningConjecture
 :LearningConjecture rdf:type owl:Class ;
-                    rdfs:subClassOf :Conjecture ;
+                    rdfs:subClassOf :Conjecture ,
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#ToulminArgument> ;
                     rdfs:comment "A conjecture about how a mediating process affects learning."@en .
 
 
@@ -151,6 +140,12 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#Measure
 :Measure rdf:type owl:Class .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#MeasurementConjecture
+:MeasurementConjecture rdf:type owl:Class ;
+                       rdfs:subClassOf :Conjecture ;
+                       rdfs:comment "A claim about how a certain procedure measures a certain construct."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#MediatingProcess
@@ -222,24 +217,20 @@
       rdfs:subClassOf :DesignFeature .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#InstructionalChallenge
-:InstructionalChallenge rdf:type owl:Class .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#MeasurementConjecture
-:MeasurementConjecture rdf:type owl:Class ;
-                       rdfs:subClassOf :Conjecture .
-
-
 #################################################################
 #    Individuals
 #################################################################
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#scale_demo
 :scale_demo rdf:type owl:NamedIndividual ,
-                     :Scale ;
-            :ID "scale001"^^xsd:string ;
-            :creator "Peter Reimann"^^xsd:string .
+                     :Scale .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#creator> rdfs:comment "One or more people who have created or contributed."^^xsd:string .
 
 
 #################################################################
@@ -258,8 +249,8 @@
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :DesignConjecture
                 :LearningConjecture
-                :PedagogyConjecture
                 :MeasurementConjecture
+                :PedagogyConjecture
               )
 ] .
 

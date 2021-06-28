@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#" uri="toulminarg.owl"/>
     <uri id="Imports Wizard Entry" name="http://www.arg.dundee.ac.uk/aif" uri="https://arg-tech.org/wp-content/uploads/AIF.owl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base=""/>
 </catalog>
