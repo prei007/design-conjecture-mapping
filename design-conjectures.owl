@@ -24,19 +24,19 @@
 #    Object Properties
 #################################################################
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasConjecture
+###  http://coolfutures.net/rdf/Design_Conjectures#hasConjecture
 :hasConjecture rdf:type owl:ObjectProperty ;
                rdfs:comment "Any design element can have a conjecture attached."^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasDesignFeature
+###  http://coolfutures.net/rdf/Design_Conjectures#hasDesignFeature
 :hasDesignFeature rdf:type owl:ObjectProperty ;
                   rdfs:domain :LearningDesign ;
                   rdfs:range :DesignFeature ;
                   rdfs:comment "A LearningDesign has a DesignFeature"^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#respondsTo
+###  http://coolfutures.net/rdf/Design_Conjectures#respondsTo
 :respondsTo rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
             rdfs:comment "For instance, a LearningDesign responds to an InstructionalChallenge"^^xsd:string .
@@ -166,59 +166,54 @@
 #    Individuals
 #################################################################
 
-###  http://coolfutures.net/rdf/Design_Conjectures#_MeasurementScale01
-:_MeasurementScale01 rdf:type owl:NamedIndividual ,
-                              :Scale .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Backing02
+###  http://coolfutures.net/rdf/Design_Conjectures#_Backing02
 :_Backing02 rdf:type owl:NamedIndividual ,
                      <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Backing> ;
             <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Teacher observations on similar designs"^^xsd:string ;
             rdfs:comment "Backing from experience of teacher with similar designs"^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Claim03
+###  http://coolfutures.net/rdf/Design_Conjectures#_Claim03
 :_Claim03 rdf:type owl:NamedIndividual ;
           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Keeping  a reflection journal will increase the number of reflections"^^xsd:string ;
           rdfs:comment "some design claim"^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Claim04
+###  http://coolfutures.net/rdf/Design_Conjectures#_Claim04
 :_Claim04 rdf:type owl:NamedIndividual ;
           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text for _Claim04"^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjecture01
+###  http://coolfutures.net/rdf/Design_Conjectures#_DesignConjecture01
 :_DesignConjecture01 rdf:type owl:NamedIndividual ,
                               :Conjecture ;
                      <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
                      <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MediatingProcessReflectionJournal ;
-                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Qualifier01> ;
+                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TQualifier01> ;
                      <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_DesignFeatureCollaborativeInquiry
+###  http://coolfutures.net/rdf/Design_Conjectures#_DesignFeatureCollaborativeInquiry
 :_DesignFeatureCollaborativeInquiry rdf:type owl:NamedIndividual ,
                                              :DiscoursePractice ;
                                     :hasConjecture :_DesignConjecture01 ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This particular discourse practice: ..."^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_InstructionalChallenge01
+###  http://coolfutures.net/rdf/Design_Conjectures#_InstructionalChallenge01
 :_InstructionalChallenge01 rdf:type owl:NamedIndividual ,
                                     :InstructionalChallenge ;
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjecture01
+###  http://coolfutures.net/rdf/Design_Conjectures#_LearningConjecture01
 :_LearningConjecture01 rdf:type owl:NamedIndividual ,
                                 :Conjecture ;
                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim04 ;
                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_Outcome01 .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_LearningDesign01
+###  http://coolfutures.net/rdf/Design_Conjectures#_LearningDesign01
 :_LearningDesign01 rdf:type owl:NamedIndividual ,
                             :LearningDesign ;
                    :hasConjecture :_PedagogyConjecture01 ;
@@ -227,19 +222,24 @@
                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_MediatingProcessReflectionJournal
+###  http://coolfutures.net/rdf/Design_Conjectures#_MeasurementScale01
+:_MeasurementScale01 rdf:type owl:NamedIndividual ,
+                              :Scale .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#_MediatingProcessReflectionJournal
 :_MediatingProcessReflectionJournal rdf:type owl:NamedIndividual ;
                                     :hasConjecture :_LearningConjecture01 .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Outcome01
+###  http://coolfutures.net/rdf/Design_Conjectures#_Outcome01
 :_Outcome01 rdf:type owl:NamedIndividual .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_PedagogyConjecture01
+###  http://coolfutures.net/rdf/Design_Conjectures#_PedagogyConjecture01
 :_PedagogyConjecture01 rdf:type owl:NamedIndividual ;
                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking> :_Backing02 ;
-                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Claim02> .
+                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim02> .
 
 
 #################################################################
@@ -274,7 +274,7 @@
 
 [ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( :_Backing02
-                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Backing01>
+                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TBacking01>
                       )
 ] .
 
@@ -282,8 +282,8 @@
 [ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( :_Claim03
                         :_Claim04
-                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Claim01>
-                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_Claim02>
+                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim01>
+                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim02>
                       )
 ] .
 
