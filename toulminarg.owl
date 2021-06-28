@@ -393,22 +393,10 @@ _:genid23 a owl:AllDifferent ;
 	owl:distinctMembers _:genid25 .
 
 _:genid25 a rdf:List ;
-	rdf:first :_Claim01 ;
+	rdf:first :_Qualifier01 ;
 	rdf:rest _:genid24 .
 
 _:genid24 a rdf:List ;
-	rdf:first :_Claim02 ;
-	rdf:rest rdf:nil .
-# 
-
-_:genid26 a owl:AllDifferent ;
-	owl:distinctMembers _:genid28 .
-
-_:genid28 a rdf:List ;
-	rdf:first :_Qualifier01 ;
-	rdf:rest _:genid27 .
-
-_:genid27 a rdf:List ;
 	rdf:first :_Qualifier02 ;
 	rdf:rest rdf:nil .
 # 

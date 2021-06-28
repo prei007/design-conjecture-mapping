@@ -1,0 +1,38 @@
+#### SPARQ Queries for conjecture mapping
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX xml: <http://www.w3.org/XML/1998/namespace> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
+# targ must be in because we mix two ontologies! 
+PREFIX targ: <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#>
+PREFIX : <http://coolfutures.net/rdf/Design_Conjectures#>
+
+## Conjecture connected to this learning design
+
+Select ?design ?conjecture
+where
+{
+    ?design a :LearningDesign . 
+    ?design :hasConjecture ?conjecture . 
+}
+
+## All conjectures in this (the default) graph
+
+Select ?s ?conjecture
+where
+{
+    ?s :hasConjecture ?conjecture . 
+}
+
+## 
+
+Select ?s ?conjecture ?text
+where
+{
+    ?s :hasConjecture ?conjecture . 
+    ?conjecture targ:hasClaim ?claim . 
+    ?claim targ:text ?text . 
+}
