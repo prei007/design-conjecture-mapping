@@ -232,7 +232,6 @@
 ###  http://coolfutures.net/rdf/Design_Conjectures#_DesignConjectureReflectiveJournal
 :_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                              :Conjecture ;
-                                    :triggersProcess :_MediatingProcessReflectiveJournal ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MeasureOfReflexivity ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierWritingLiteracy ;
@@ -243,6 +242,7 @@
 :_DesignFeatureReflectiveJournal rdf:type owl:NamedIndividual ,
                                           :DiscoursePractice ;
                                  :hasConjecture :_DesignConjectureReflectiveJournal ;
+                                 :triggersProcess :_MediatingProcessReflectiveJournal ;
                                  <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "How the design feature ReflectiveJournal will get implemented in this learning environment...link to the respective document, on Dropbox for instance."^^xsd:string .
 
 
