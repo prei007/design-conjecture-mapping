@@ -46,6 +46,10 @@
             rdfs:comment "For instance, a LearningDesign responds to an InstructionalChallenge"^^xsd:string .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasMeasure
+:hasMeasure rdf:type owl:ObjectProperty .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -208,7 +212,7 @@
 :_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                              :Conjecture ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
-                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MediatingProcessReflectiveJournal ;
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MeasureOfReflexivity ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierWritingLiteracy ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
 
@@ -249,7 +253,8 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_MediatingProcessReflectiveJournal
 :_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ;
-                                    :hasConjecture :_LearningConjectureReflectiveJournal .
+                                    :hasConjecture :_LearningConjectureReflectiveJournal ;
+                                    :hasMeasure :_MeasureOfReflexivity .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Outcome01
@@ -269,6 +274,10 @@
             <http://purl.org/dc/terms/relation> "http://dx.doi.org/10.1007/978-3-030-00668-6_8"^^xsd:string ;
             <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This study supports the claim."^^xsd:string ;
             rdfs:comment "Backing from study"^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_MeasureOfReflexivity
+:_MeasureOfReflexivity rdf:type owl:NamedIndividual .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierWritingLiteracy
