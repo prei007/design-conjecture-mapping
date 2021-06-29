@@ -46,8 +46,29 @@
             rdfs:comment "For instance, a LearningDesign responds to an InstructionalChallenge"^^xsd:string .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#argument
+:argument rdf:type owl:ObjectProperty .
+
+
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasMeasure
-:hasMeasure rdf:type owl:ObjectProperty .
+:hasMeasure rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :MediatingProcess
+                                        :Outcome
+                                      )
+                        ] .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasOutcome
+:hasOutcome rdf:type owl:ObjectProperty ;
+            rdfs:domain :MediatingProcess ;
+            rdfs:range :Outcome .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#triggersProcess
+:triggersProcess rdf:type owl:ObjectProperty ;
+                 rdfs:domain :DesignFeature ;
+                 rdfs:range :MediatingProcess .
 
 
 #################################################################
@@ -211,6 +232,7 @@
 ###  http://coolfutures.net/rdf/Design_Conjectures#_DesignConjectureReflectiveJournal
 :_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                              :Conjecture ;
+                                    :triggersProcess :_MediatingProcessReflectiveJournal ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MeasureOfReflexivity ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierWritingLiteracy ;
@@ -256,11 +278,14 @@
 :_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ,
                                              :ParticipantArtifact ;
                                     :hasConjecture :_LearningConjectureReflectiveJournal ;
-                                    :hasMeasure :_MeasureOfReflexivity .
+                                    :hasMeasure :_MeasureOfReflexivity ;
+                                    :hasOutcome :_Outcome01 .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Outcome01
-:_Outcome01 rdf:type owl:NamedIndividual .
+:_Outcome01 rdf:type owl:NamedIndividual ,
+                     :LearningOutcome ;
+            :hasMeasure :_MeasurementScale01 .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_PedagogyConjecture01

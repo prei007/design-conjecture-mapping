@@ -40,14 +40,12 @@
 # http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#dataToWarrant
 
 :dataToWarrant a owl:ObjectProperty ;
-	rdfs:subPropertyOf owl:topObjectProperty ;
 	rdfs:domain :Data ;
 	rdfs:range :Warrant .
 # 
 # http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking
 
 :hasBacking a owl:ObjectProperty ;
-	rdfs:subPropertyOf owl:topObjectProperty ;
 	rdfs:domain :ToulminArgument ;
 	rdfs:range :Backing .
 # 
