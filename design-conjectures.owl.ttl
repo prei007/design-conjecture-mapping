@@ -241,7 +241,8 @@
 :_LearningDesign01 rdf:type owl:NamedIndividual ,
                             :LearningDesign ;
                    :hasConjecture :_PedagogyConjecture01 ;
-                   :hasDesignFeature :_DesignFeatureReflectiveJournal ;
+                   :hasDesignFeature :_DesignFeatureReflectiveJournal ,
+                                     :_DesignFeatureCollaborativeInquiry ;
                    :respondsTo :_InstructionalChallenge01 ;
                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
 
@@ -252,7 +253,8 @@
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_MediatingProcessReflectiveJournal
-:_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ;
+:_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ,
+                                             :ParticipantArtifact ;
                                     :hasConjecture :_LearningConjectureReflectiveJournal ;
                                     :hasMeasure :_MeasureOfReflexivity .
 
@@ -276,8 +278,14 @@
             rdfs:comment "Backing from study"^^xsd:string .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_DesignFeatureCollaborativeInquiry
+:_DesignFeatureCollaborativeInquiry rdf:type owl:NamedIndividual ,
+                                             :DiscoursePractice .
+
+
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_MeasureOfReflexivity
-:_MeasureOfReflexivity rdf:type owl:NamedIndividual .
+:_MeasureOfReflexivity rdf:type owl:NamedIndividual ,
+                                :Measure .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierWritingLiteracy
