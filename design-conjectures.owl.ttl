@@ -20,6 +20,10 @@
 <http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
 
 
+###  http://purl.org/dc/terms/relation
+<http://purl.org/dc/terms/relation> rdf:type owl:AnnotationProperty .
+
+
 #################################################################
 #    Object Properties
 #################################################################
@@ -45,6 +49,11 @@
 #################################################################
 #    Data properties
 #################################################################
+
+###  http://purl.org/dc/terms/relation
+<http://purl.org/dc/terms/relation> rdf:type owl:DatatypeProperty ,
+                                             owl:FunctionalProperty .
+
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> rdf:type owl:FunctionalProperty .
@@ -176,13 +185,12 @@
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Claim01
 :_Claim01 rdf:type owl:NamedIndividual ,
                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> ;
-          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text of _Claim01"^^xsd:string .
+          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Scientific argumentation requires appropriation of discursive practices of making, justifying, and evaluating claims."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Claim02
 :_Claim02 rdf:type owl:NamedIndividual ,
-                   <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> ;
-          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text of _Claim02"^^xsd:string .
+                   <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Claim03
@@ -193,23 +201,23 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Claim04
 :_Claim04 rdf:type owl:NamedIndividual ;
-          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "I am the text for _Claim04"^^xsd:string .
+          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Writing helps with remembering content."^^xsd:string .
 
 
-###  http://coolfutures.net/rdf/Design_Conjectures#_DesignConjecture01
-:_DesignConjecture01 rdf:type owl:NamedIndividual ,
-                              :Conjecture ;
-                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
-                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MediatingProcessReflectionJournal ;
-                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TQualifier01> ;
-                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
+###  http://coolfutures.net/rdf/Design_Conjectures#_DesignConjectureReflectiveJournal
+:_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
+                                             :Conjecture ;
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MediatingProcessReflectiveJournal ;
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierWritingLiteracy ;
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
 
 
-###  http://coolfutures.net/rdf/Design_Conjectures#_DesignFeatureCollaborativeInquiry
-:_DesignFeatureCollaborativeInquiry rdf:type owl:NamedIndividual ,
-                                             :DiscoursePractice ;
-                                    :hasConjecture :_DesignConjecture01 ;
-                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This particular discourse practice: ..."^^xsd:string .
+###  http://coolfutures.net/rdf/Design_Conjectures#_DesignFeatureReflectiveJournal
+:_DesignFeatureReflectiveJournal rdf:type owl:NamedIndividual ,
+                                          :DiscoursePractice ;
+                                 :hasConjecture :_DesignConjectureReflectiveJournal ;
+                                 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "How the design feature ReflectiveJournal will get implemented in this learning environment...link to the respective document, on Dropbox for instance."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_InstructionalChallenge01
@@ -218,18 +226,18 @@
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
 
 
-###  http://coolfutures.net/rdf/Design_Conjectures#_LearningConjecture01
-:_LearningConjecture01 rdf:type owl:NamedIndividual ,
-                                :Conjecture ;
-                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim04 ;
-                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_Outcome01 .
+###  http://coolfutures.net/rdf/Design_Conjectures#_LearningConjectureReflectiveJournal
+:_LearningConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
+                                               :Conjecture ;
+                                      <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim04 ;
+                                      <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_Outcome01 .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_LearningDesign01
 :_LearningDesign01 rdf:type owl:NamedIndividual ,
                             :LearningDesign ;
                    :hasConjecture :_PedagogyConjecture01 ;
-                   :hasDesignFeature :_DesignFeatureCollaborativeInquiry ;
+                   :hasDesignFeature :_DesignFeatureReflectiveJournal ;
                    :respondsTo :_InstructionalChallenge01 ;
                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
 
@@ -239,9 +247,9 @@
                               :Scale .
 
 
-###  http://coolfutures.net/rdf/Design_Conjectures#_MediatingProcessReflectionJournal
-:_MediatingProcessReflectionJournal rdf:type owl:NamedIndividual ;
-                                    :hasConjecture :_LearningConjecture01 .
+###  http://coolfutures.net/rdf/Design_Conjectures#_MediatingProcessReflectiveJournal
+:_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ;
+                                    :hasConjecture :_LearningConjectureReflectiveJournal .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_Outcome01
@@ -250,13 +258,30 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_PedagogyConjecture01
 :_PedagogyConjecture01 rdf:type owl:NamedIndividual ;
-                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking> :_Backing02 ;
-                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim02 .
+                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking> :_Backing02 ,
+                                                                                                 :_Backing01 ;
+                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim01 .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Backing01
+:_Backing01 rdf:type owl:NamedIndividual ,
+                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Backing> ;
+            <http://purl.org/dc/terms/relation> "http://dx.doi.org/10.1007/978-3-030-00668-6_8"^^xsd:string ;
+            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This study supports the claim."^^xsd:string ;
+            rdfs:comment "Backing from study"^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierWritingLiteracy
+:_QualifierWritingLiteracy rdf:type owl:NamedIndividual ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Only for students who can write on Level 5 as per national writing assessment."^^xsd:string .
 
 
 #################################################################
 #    Annotations
 #################################################################
+
+<http://purl.org/dc/terms/relation> rdfs:comment "Recommended practice is to identify the related resource by means of a URI. If this is not possible or feasible, a string conforming to a formal identification system may be provided"^^xsd:string .
+
 
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TArgument01> rdfs:comment "A Toulmin style argument, hence the T"^^xsd:string .
 
@@ -284,22 +309,6 @@
                 :TaskStructure
                 :Tool
               )
-] .
-
-
-[ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( :_Backing02
-                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TBacking01>
-                      )
-] .
-
-
-[ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( :_Claim03
-                        :_Claim04
-                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim01>
-                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim02>
-                      )
 ] .
 
 
