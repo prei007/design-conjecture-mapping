@@ -100,16 +100,22 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#DesignFeature
 :DesignFeature rdf:type owl:Class ;
-               rdfs:comment "DesignFeature is what Sandoval calls Embodiment."@en .
+               owl:disjointWith :MediatingProcess ,
+                                :Outcome ;
+               rdfs:comment "DesignFeature is what Sandoval calls Embodiment. it is the hook to link to designs and design models. For the moment, the relation to design (models) outside of dcon can be established with dcterms:relation."@en .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#DiscoursePractice
 :DiscoursePractice rdf:type owl:Class ;
-                   rdfs:subClassOf :DesignFeature .
+                   rdfs:subClassOf :DesignFeature ;
+                   rdfs:comment "A DesignFeature that structures a discourse. For instance, the discourse  might follow a particular script."^^xsd:string ;
+                   rdfs:seeAlso "Roles and Responsibilities"^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#InstructionalChallenge
-:InstructionalChallenge rdf:type owl:Class .
+:InstructionalChallenge rdf:type owl:Class ;
+                        rdfs:subClassOf :Challenge ;
+                        rdfs:comment "This is the challenge that motivates the innovation, the new learning design. It typically is a challenge that learners face, one that does not have  satisfying solution yet."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#LearningDesign
@@ -132,7 +138,8 @@
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#MediatingProcess
-:MediatingProcess rdf:type owl:Class .
+:MediatingProcess rdf:type owl:Class ;
+                  owl:disjointWith :Outcome .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#MotivationOutcome
@@ -194,6 +201,16 @@
 ###  http://coolfutures.net/rdf/Design_Conjectures#Tool
 :Tool rdf:type owl:Class ;
       rdfs:subClassOf :DesignFeature .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Challenge
+:Challenge rdf:type owl:Class .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#ConstraintChallenge
+:ConstraintChallenge rdf:type owl:Class ;
+                     rdfs:subClassOf :Challenge ;
+                     rdfs:comment "Challenges arising from conditions that are not under the control of the designer, such as established assessment methods, mandated learning standards, lack of technology."^^xsd:string .
 
 
 #################################################################
