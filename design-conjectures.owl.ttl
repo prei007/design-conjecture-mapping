@@ -39,7 +39,7 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#hasDesignFeature
 :hasDesignFeature rdf:type owl:ObjectProperty ;
-                  rdfs:domain :LearningDesign ;
+                  rdfs:domain :DesignConjectureMap ;
                   rdfs:range :DesignFeature ;
                   rdfs:comment "A LearningDesign has a DesignFeature"^^xsd:string .
 
@@ -140,6 +140,11 @@ This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
                      rdfs:seeAlso "https://doi.dx.org/10.22318/icls2014.78"^^xsd:anyURI .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures#DesignConjectureMap
+:DesignConjectureMap rdf:type owl:Class ;
+                     rdfs:comment "A learnining design about which we are going to make conjectures. It is addressing an instructional challenge"@en .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures#DesignFeature
 :DesignFeature rdf:type owl:Class ;
                owl:disjointWith :MediatingProcess ,
@@ -158,11 +163,6 @@ This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
 :InstructionalChallenge rdf:type owl:Class ;
                         rdfs:subClassOf :Challenge ;
                         rdfs:comment "This is the challenge that motivates the innovation, the new learning design. It typically is a challenge that learners face, one that does not have  satisfying solution yet."^^xsd:string .
-
-
-###  http://coolfutures.net/rdf/Design_Conjectures#LearningDesign
-:LearningDesign rdf:type owl:Class ;
-                rdfs:comment "A learnining design about which we are going to make conjectures. It is addressing an instructional challenge"@en .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#LearningOutcome
@@ -245,6 +245,14 @@ This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
       rdfs:subClassOf :DesignFeature .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#DesignPrinciple
+:DesignPrinciple rdf:type owl:Class ;
+                 rdfs:comment """Higher-order principles, or patterns, that reflect prior experience with learning desings.
+
+Suggested in: Wu, J., & Chen, V. D. T. (2018). Refining conjecture mapping for design-based research. Paper presented at the ICCE 2018 - 26th International Conference on Computers in Education, Main Conference Proceedings."""^^xsd:string ;
+                 rdfs:seeAlso "https://repository.nie.edu.sg/bitstream/10497/22839/1/ICCE-2018-767.pdf"^^xsd:anyURI .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -286,13 +294,23 @@ This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Writing helps with remembering content."^^xsd:string .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures#_ConjectureMap01
+:_ConjectureMap01 rdf:type owl:NamedIndividual ,
+                           :DesignConjectureMap ;
+                  :hasConjecture :_PedagogyConjecture01 ;
+                  :hasDesignFeature :_DesignFeatureCollaborativeInquiry ,
+                                    :_DesignFeatureReflectiveJournal ;
+                  :respondsTo :_InstructionalChallenge01 ;
+                  <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures#_DesignConjectureReflectiveJournal
 :_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                              :Conjecture ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MeasureOfReflexivity ;
-                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierWritingLiteracy ,
-                                                                                                                :_QualifierFromTechConstraint ;
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierFromTechConstraint ,
+                                                                                                                :_QualifierWritingLiteracy ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
 
 
@@ -320,16 +338,6 @@ This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
                                                :Conjecture ;
                                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim04 ;
                                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_Outcome01 .
-
-
-###  http://coolfutures.net/rdf/Design_Conjectures#_LearningDesign01
-:_LearningDesign01 rdf:type owl:NamedIndividual ,
-                            :LearningDesign ;
-                   :hasConjecture :_PedagogyConjecture01 ;
-                   :hasDesignFeature :_DesignFeatureCollaborativeInquiry ,
-                                     :_DesignFeatureReflectiveJournal ;
-                   :respondsTo :_InstructionalChallenge01 ;
-                   <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_MeasureOfReflexivity
@@ -363,16 +371,16 @@ This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim01 .
 
 
-###  http://coolfutures.net/rdf/Design_Conjectures#_QualifierWritingLiteracy
-:_QualifierWritingLiteracy rdf:type owl:NamedIndividual ;
-                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Only for students who can write on Level 5 as per national writing assessment."^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierFromTechConstraint
+###  http://coolfutures.net/rdf/Design_Conjectures#_QualifierFromTechConstraint
 :_QualifierFromTechConstraint rdf:type owl:NamedIndividual ,
                                        :ConstraintChallenge ,
                                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Qualifier> ;
                               <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "May only work if student has a workstation at home."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#_QualifierWritingLiteracy
+:_QualifierWritingLiteracy rdf:type owl:NamedIndividual ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Only for students who can write on Level 5 as per national writing assessment."^^xsd:string .
 
 
 #################################################################
@@ -382,7 +390,15 @@ This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
 <http://purl.org/dc/terms/relation> rdfs:comment "Recommended practice is to identify the related resource by means of a URI. If this is not possible or feasible, a string conforming to a formal identification system may be provided"^^xsd:string .
 
 
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#QualifierApplication> rdfs:comment """A description how the Qualifier(s) related to a claim get evaluated and, where  multiple, combined and how this does affect the claim status. 
+
+For instance, could work with the value of the data property beliefStatus."""^^xsd:string .
+
+
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TArgument01> rdfs:comment "A Toulmin style argument, hence the T"^^xsd:string .
+
+
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> rdfs:seeAlso "https://repository.isls.org/bitstream/1/1194/1/78-85.pdf"^^xsd:anyURI .
 
 
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#creator> rdfs:comment "One or more people who have created or contributed."^^xsd:string .
