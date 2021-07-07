@@ -68,7 +68,32 @@
 ###  http://coolfutures.net/rdf/Design_Conjectures#triggersProcess
 :triggersProcess rdf:type owl:ObjectProperty ;
                  rdfs:domain :DesignFeature ;
-                 rdfs:range :MediatingProcess .
+                 rdfs:range :MediatingProcess ;
+                 rdfs:comment """This relation is n:m in nature: one and the same design feature can trigger multiple MediatingProcesses, and a MediatingProcess may need multiple DesignFeatures. 
+
+This reflects the fact that a MediatingProcess often will describe the *interaction* of DesignFeatures. 
+
+In the future, it would be good to model the difference between necessary and sufficient relations. Also for the relation between MediatingProcess and Outcome."""^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#necessaryForOutcome
+:necessaryForOutcome rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :hasOutcome .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#necessaryTrigger
+:necessaryTrigger rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :triggersProcess .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#sufficientForOutcome
+:sufficientForOutcome rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :hasOutcome .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#sufficientTrigger
+:sufficientTrigger rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :triggersProcess .
 
 
 #################################################################
@@ -93,9 +118,22 @@
                  rdfs:subClassOf :Outcome .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures#Challenge
+:Challenge rdf:type owl:Class .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures#Conjecture
 :Conjecture rdf:type owl:Class ;
             rdfs:subClassOf <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#ToulminArgument> .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#ConstraintChallenge
+:ConstraintChallenge rdf:type owl:Class ;
+                     rdfs:subClassOf :Challenge ;
+                     rdfs:comment """Challenges arising from conditions that are not under the control of the designer, such as established assessment methods, mandated learning standards, lack of technology. This kind of challenge can be connected to any element and block the achievement of Mediating Process outcomes and intervention outcomes. 
+
+Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping design research trajectories. Paper presented at the Proceedings of International Conference of the Learning Sciences, ICLS"""^^xsd:string ;
+                     rdfs:seeAlso "https://doi.dx.org/10.22318/icls2014.78"^^xsd:anyURI .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#DesignFeature
@@ -201,19 +239,6 @@
 ###  http://coolfutures.net/rdf/Design_Conjectures#Tool
 :Tool rdf:type owl:Class ;
       rdfs:subClassOf :DesignFeature .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Challenge
-:Challenge rdf:type owl:Class .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#ConstraintChallenge
-:ConstraintChallenge rdf:type owl:Class ;
-                     rdfs:subClassOf :Challenge ;
-                     rdfs:comment """Challenges arising from conditions that are not under the control of the designer, such as established assessment methods, mandated learning standards, lack of technology. This kind of challenge can be connected to any element and block the achievement of Mediating Process outcomes and intervention outcomes. 
-
-Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping design research trajectories. Paper presented at the Proceedings of International Conference of the Learning Sciences, ICLS"""^^xsd:string ;
-                     rdfs:seeAlso "https://doi.dx.org/10.22318/icls2014.78"^^xsd:anyURI .
 
 
 #################################################################
