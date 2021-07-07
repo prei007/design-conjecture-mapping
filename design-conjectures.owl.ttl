@@ -59,10 +59,32 @@
             rdfs:range :Outcome .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures#necessaryForOutcome
+:necessaryForOutcome rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :hasOutcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#necessaryTrigger
+:necessaryTrigger rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :triggersProcess .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures#respondsTo
 :respondsTo rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
             rdfs:comment "For instance, a LearningDesign responds to an InstructionalChallenge"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#sufficientForOutcome
+:sufficientForOutcome rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :hasOutcome ;
+                      rdf:type owl:FunctionalProperty .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#sufficientTrigger
+:sufficientTrigger rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :triggersProcess ;
+                   rdf:type owl:FunctionalProperty .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#triggersProcess
@@ -74,28 +96,6 @@
 This reflects the fact that a MediatingProcess often will describe the *interaction* of DesignFeatures. 
 
 In the future, it would be good to model the difference between necessary and sufficient relations. Also for the relation between MediatingProcess and Outcome."""^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#necessaryForOutcome
-:necessaryForOutcome rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf :hasOutcome .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#necessaryTrigger
-:necessaryTrigger rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf :triggersProcess .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#sufficientForOutcome
-:sufficientForOutcome rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf :hasOutcome ;
-                      rdf:type owl:FunctionalProperty .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#sufficientTrigger
-:sufficientTrigger rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf :triggersProcess ;
-                   rdf:type owl:FunctionalProperty .
 
 
 #################################################################
@@ -134,7 +134,9 @@ In the future, it would be good to model the difference between necessary and su
                      rdfs:subClassOf :Challenge ;
                      rdfs:comment """Challenges arising from conditions that are not under the control of the designer, such as established assessment methods, mandated learning standards, lack of technology. This kind of challenge can be connected to any element and block the achievement of Mediating Process outcomes and intervention outcomes. 
 
-Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping design research trajectories. Paper presented at the Proceedings of International Conference of the Learning Sciences, ICLS"""^^xsd:string ;
+Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping design research trajectories. Paper presented at the Proceedings of International Conference of the Learning Sciences, ICLS
+
+This kind of challenge gets modelled as Qualifier to a claim."""^^xsd:string ;
                      rdfs:seeAlso "https://doi.dx.org/10.22318/icls2014.78"^^xsd:anyURI .
 
 
@@ -289,7 +291,8 @@ Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping 
                                              :Conjecture ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MeasureOfReflexivity ;
-                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierWritingLiteracy ;
+                                    <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierWritingLiteracy ,
+                                                                                                                :_QualifierFromTechConstraint ;
                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
 
 
@@ -363,6 +366,13 @@ Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping 
 ###  http://coolfutures.net/rdf/Design_Conjectures#_QualifierWritingLiteracy
 :_QualifierWritingLiteracy rdf:type owl:NamedIndividual ;
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Only for students who can write on Level 5 as per national writing assessment."^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierFromTechConstraint
+:_QualifierFromTechConstraint rdf:type owl:NamedIndividual ,
+                                       :ConstraintChallenge ,
+                                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Qualifier> ;
+                              <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "May only work if student has a workstation at home."^^xsd:string .
 
 
 #################################################################
