@@ -210,7 +210,10 @@
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#ConstraintChallenge
 :ConstraintChallenge rdf:type owl:Class ;
                      rdfs:subClassOf :Challenge ;
-                     rdfs:comment "Challenges arising from conditions that are not under the control of the designer, such as established assessment methods, mandated learning standards, lack of technology."^^xsd:string .
+                     rdfs:comment """Challenges arising from conditions that are not under the control of the designer, such as established assessment methods, mandated learning standards, lack of technology. This kind of challenge can be connected to any element and block the achievement of Mediating Process outcomes and intervention outcomes. 
+
+Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping design research trajectories. Paper presented at the Proceedings of International Conference of the Learning Sciences, ICLS"""^^xsd:string ;
+                     rdfs:seeAlso "https://doi.dx.org/10.22318/icls2014.78"^^xsd:anyURI .
 
 
 #################################################################
