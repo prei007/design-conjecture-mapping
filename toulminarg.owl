@@ -4,351 +4,418 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#> .
 
-<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#> rdf:type owl:Ontology ;
-                                                                 <http://purl.org/dc/terms/creator> "Peter Reimann"^^xsd:string ;
-                                                                 rdfs:comment "A top level ontology for Toulmin-like argumentation following the AIF standard."^^xsd:string ;
-                                                                 owl:versionInfo "version 1.0"^^xsd:string .
-
-#################################################################
-#    Annotation properties
-#################################################################
-
-###  http://purl.org/dc/terms/creator
-<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
-
-
-#################################################################
-#    Object Properties
-#################################################################
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#backingToWarrant
-:backingToWarrant rdf:type owl:ObjectProperty ;
-                  rdfs:domain :Backing ;
-                  rdfs:range :Warrant .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#dataToWarrant
-:dataToWarrant rdf:type owl:ObjectProperty ;
-               rdfs:domain :Data ;
-               rdfs:range :Warrant .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking
-:hasBacking rdf:type owl:ObjectProperty ;
-            rdfs:domain :ToulminArgument ;
-            rdfs:range :Backing .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim
-:hasClaim rdf:type owl:ObjectProperty ;
-          rdfs:domain :ToulminArgument ;
-          rdfs:range :Claim .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData
-:hasData rdf:type owl:ObjectProperty ;
-         rdfs:domain :ToulminArgument ;
-         rdfs:range :Data .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier
-:hasQualifier rdf:type owl:ObjectProperty ;
-              rdfs:domain :ToulminArgument ;
-              rdfs:range :Qualifier .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifierApplication
-:hasQualifierApplication rdf:type owl:ObjectProperty ;
-                         rdfs:domain :ToulminArgument ;
-                         rdfs:range :QualifierApplication .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasRebuttal
-:hasRebuttal rdf:type owl:ObjectProperty ;
-             rdfs:domain :ToulminArgument ;
-             rdfs:range :Rebuttal .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasRebuttalApplication
-:hasRebuttalApplication rdf:type owl:ObjectProperty ;
-                        rdfs:domain :ToulminArgument ;
-                        rdfs:range :RebuttalApplication .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasWarrant
-:hasWarrant rdf:type owl:ObjectProperty ;
-            rdfs:domain :ToulminArgument ;
-            rdfs:range :Warrant .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#qualifierToQualifierapp
-:qualifierToQualifierapp rdf:type owl:ObjectProperty ;
-                         rdfs:domain :Qualifier ;
-                         rdfs:range :QualifierApplication .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#qualifierappToClaim
-:qualifierappToClaim rdf:type owl:ObjectProperty ;
-                     rdfs:domain :QualifierApplication ;
-                     rdfs:range :Claim .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#rebuttalToRebuttalapp
-:rebuttalToRebuttalapp rdf:type owl:ObjectProperty ;
-                       rdfs:domain :Rebuttal ;
-                       rdfs:range :RebuttalApplication .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#rebuttalappToClaim
-:rebuttalappToClaim rdf:type owl:ObjectProperty ;
-                    rdfs:domain :RebuttalApplication ;
-                    rdfs:range :Claim .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#warrantToClaim
-:warrantToClaim rdf:type owl:ObjectProperty ;
-                rdfs:domain :Warrant ;
-                rdfs:range :Claim .
-
-
-#################################################################
-#    Data properties
-#################################################################
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
-:beliefStatus rdf:type owl:DatatypeProperty ;
-              rdfs:range [ rdf:type rdfs:Datatype ;
-                           owl:oneOf [ rdf:type rdf:List ;
-                                       rdf:first "accepted" ;
-                                       rdf:rest [ rdf:type rdf:List ;
-                                                  rdf:first "confirmed" ;
-                                                  rdf:rest [ rdf:type rdf:List ;
-                                                             rdf:first "disconfirmed" ;
-                                                             rdf:rest [ rdf:type rdf:List ;
-                                                                        rdf:first "rejected" ;
-                                                                        rdf:rest rdf:nil
-                                                                      ]
-                                                           ]
-                                                ]
-                                     ]
-                         ] ;
-              rdfs:comment "The current 'truth' status of a conjecture. A shortcut for conjectures that are dependent on other conjectures, and needed for 'ground truth'. Values are  confirmed and disconfirmed for empirical concjectures, rejected and accepted for others."^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#creator
-:creator rdf:type owl:DatatypeProperty ;
-         rdfs:range xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#description
-:description rdf:type owl:DatatypeProperty ;
-             rdfs:range xsd:string ;
-             rdfs:comment "A description. This is meta information. The content is in property text."^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text
-:text rdf:type owl:DatatypeProperty ;
-      rdfs:range xsd:string ;
-      rdfs:comment "The content of the node."^^xsd:string .
-
-
-#################################################################
-#    Classes
-#################################################################
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Backing
-:Backing rdf:type owl:Class ;
-         rdfs:subClassOf :I-Node ;
-         rdfs:comment "The backing supports the warrant; it acts as evidence for the warrant."^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim
-:Claim rdf:type owl:Class ;
-       rdfs:subClassOf :I-Node ;
-       rdfs:comment "The assertion that the argument backs."^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Data
-:Data rdf:type owl:Class ;
-      rdfs:subClassOf :I-Node ;
-      rdfs:comment "The evidence (e.g. fact, an example, statistics) that supports the claim."^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#I-Node
-:I-Node rdf:type owl:Class ;
-        rdfs:comment "For compatibility with AIF https://arg-tech.org/wp-content/uploads/AIF.owl"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Qualifier
-:Qualifier rdf:type owl:Class ;
-           rdfs:subClassOf :I-Node ;
-           rdfs:comment "Qualiﬁes the conditions under which the argument holds."^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#QualifierApplication
-:QualifierApplication rdf:type owl:Class ;
-                      rdfs:subClassOf :RA-Node .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#RA-Node
-:RA-Node rdf:type owl:Class ;
-         rdfs:subClassOf :S-Node ;
-         rdfs:comment "This for compatibility with AIF  https://arg-tech.org/wp-content/uploads/AIF.owl"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Rebuttal
-:Rebuttal rdf:type owl:Class ;
-          rdfs:subClassOf :I-Node ;
-          rdfs:comment "A rebuttal is an argument that might be made against the claim"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#RebuttalApplication
-:RebuttalApplication rdf:type owl:Class ;
-                     rdfs:subClassOf :RA-Node .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#S-Node
-:S-Node rdf:type owl:Class ;
-        rdfs:comment "This for compatibility with AIF  https://arg-tech.org/wp-content/uploads/AIF.owl"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#ToulminArgument
-:ToulminArgument rdf:type owl:Class ;
-                 owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :hasBacking ;
-                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                              owl:onClass :Backing
-                                                            ]
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :hasData ;
-                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                              owl:onClass :Data
-                                                            ]
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :hasClaim ;
-                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                              owl:onClass :Claim
-                                                            ]
-                                                          ) ;
-                                       rdf:type owl:Class
-                                     ] ;
-                 rdfs:comment "An argument must have exactly one claim, Warrant, and Qualifier, and minimally one Data and 1 Backing."^^xsd:string .
-
-[ rdf:type owl:Axiom ;
-   owl:annotatedSource :ToulminArgument ;
-   owl:annotatedProperty owl:equivalentClass ;
-   owl:annotatedTarget [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
-                                                owl:onProperty :hasBacking ;
-                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                owl:onClass :Backing
-                                              ]
-                                              [ rdf:type owl:Restriction ;
-                                                owl:onProperty :hasData ;
-                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                owl:onClass :Data
-                                              ]
-                                              [ rdf:type owl:Restriction ;
-                                                owl:onProperty :hasClaim ;
-                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                owl:onClass :Claim
-                                              ]
-                                            ) ;
-                         rdf:type owl:Class
-                       ] ;
-   rdfs:comment "Check this because constraint does not catch the two claims for _Argument01."^^xsd:string
- ] .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Warrant
-:Warrant rdf:type owl:Class ;
-         rdfs:subClassOf :RA-Node .
-
-
-#################################################################
-#    Individuals
-#################################################################
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TArgument01
-:_TArgument01 rdf:type owl:NamedIndividual ,
-                       :ToulminArgument ;
-              :hasBacking :_TBacking01 ;
-              :hasClaim :_TClaim01 ;
-              :hasData :_TData01 ;
-              :hasQualifier :_TQualifier01 ;
-              :hasRebuttal :_TRebuttal01 .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TBacking01
-:_TBacking01 rdf:type owl:NamedIndividual ,
-                      :Backing ;
-             :text "Correlations indicate that there are systematic relations between variables"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim01
-:_TClaim01 rdf:type owl:NamedIndividual ,
-                    :Claim ;
-           :text "Epistemic reflection produces demands for justification"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim02
-:_TClaim02 rdf:type owl:NamedIndividual ,
-                    :Claim ;
-           :text "The design features f1, f2, f3 in concertation will lead to growth in scientific argumentation"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TData01
-:_TData01 rdf:type owl:NamedIndividual ,
-                   :Data ;
-          :text "Observed an increase in requsted justifications after students in pilot study reflected"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TQualifier01
-:_TQualifier01 rdf:type owl:NamedIndividual ,
-                        :Qualifier ;
-               :text "Provided that learners have a verbal intelligence score > 90"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TQualifier02
-:_TQualifier02 rdf:type owl:NamedIndividual ,
-                        :Qualifier ;
-               :text "Only applies when numerical intelligence GT 110"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TRebuttal01
-:_TRebuttal01 rdf:type owl:NamedIndividual ,
-                       :Rebuttal ;
-              :text "Study B finds no relation between reflection and request for justifications"^^xsd:string .
-
-
-#################################################################
-#    General axioms
-#################################################################
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Backing
-                :Claim
-                :Data
-                :Qualifier
-                :Rebuttal
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :QualifierApplication
-                :RebuttalApplication
-                :Warrant
-              )
-] .
-
-
-[ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( :_TQualifier01
-                        :_TQualifier02
-                      )
-] .
-
-
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#> a owl:Ontology ;
+	<http://purl.org/dc/terms/creator> "Peter Reimann"^^xsd:string ;
+	rdfs:comment "A top level ontology for Toulmin-like argumentation following the AIF standard."^^xsd:string ;
+	owl:versionInfo "version 1.0"^^xsd:string .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/dc/terms/creator
+
+<http://purl.org/dc/terms/creator> a owl:AnnotationProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#backingToWarrant
+
+:backingToWarrant a owl:ObjectProperty ;
+	rdfs:domain :Backing ;
+	rdfs:range :Warrant .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#dataToWarrant
+
+:dataToWarrant a owl:ObjectProperty ;
+	rdfs:domain :Data ;
+	rdfs:range :Warrant .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking
+
+:hasBacking a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :Backing .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim
+
+:hasClaim a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :Claim .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData
+
+:hasData a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :Data .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier
+
+:hasQualifier a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :Qualifier .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifierApplication
+
+:hasQualifierApplication a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :QualifierApplication .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasRebuttal
+
+:hasRebuttal a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :Rebuttal .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasRebuttalApplication
+
+:hasRebuttalApplication a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :RebuttalApplication .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasWarrant
+
+:hasWarrant a owl:ObjectProperty ;
+	rdfs:domain :ToulminArgument ;
+	rdfs:range :Warrant .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#qualifierToQualifierapp
+
+:qualifierToQualifierapp a owl:ObjectProperty ;
+	rdfs:domain :Qualifier ;
+	rdfs:range :QualifierApplication .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#qualifierappToClaim
+
+:qualifierappToClaim a owl:ObjectProperty ;
+	rdfs:domain :QualifierApplication ;
+	rdfs:range :Claim .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#rebuttalToRebuttalapp
+
+:rebuttalToRebuttalapp a owl:ObjectProperty ;
+	rdfs:domain :Rebuttal ;
+	rdfs:range :RebuttalApplication .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#rebuttalappToClaim
+
+:rebuttalappToClaim a owl:ObjectProperty ;
+	rdfs:domain :RebuttalApplication ;
+	rdfs:range :Claim .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#warrantToClaim
+
+:warrantToClaim a owl:ObjectProperty ;
+	rdfs:domain :Warrant ;
+	rdfs:range :Claim .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
+
+:beliefStatus a owl:DatatypeProperty ;
+	rdfs:range _:genid1 .
+
+_:genid1 a rdfs:Datatype ;
+	owl:oneOf _:genid8 .
+
+_:genid8 a rdf:List ;
+	rdf:first "accepted" ;
+	rdf:rest _:genid7 .
+
+_:genid7 a rdf:List ;
+	rdf:first "confirmed" ;
+	rdf:rest _:genid6 .
+
+_:genid6 a rdf:List ;
+	rdf:first "disconfirmed" ;
+	rdf:rest _:genid5 .
+
+_:genid5 a rdf:List ;
+	rdf:first "fully-supported" ;
+	rdf:rest _:genid4 .
+
+_:genid4 a rdf:List ;
+	rdf:first "partially-supported" ;
+	rdf:rest _:genid3 .
+
+_:genid3 a rdf:List ;
+	rdf:first "rejected" ;
+	rdf:rest _:genid2 .
+
+_:genid2 a rdf:List ;
+	rdf:first "unsupported" ;
+	rdf:rest rdf:nil .
+
+:beliefStatus rdfs:comment """The current 'truth' status of a conjecture. A shortcut for conjectures that are dependent on other conjectures, and needed for 'ground truth'. Values are  confirmed and disconfirmed for empirical concjectures, rejected and accepted for others.
+
+For empirical conjectures, Ma & van Aalst suggest the values fully suported, partially supported, and unsupported.  They are included here, too."""^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#creator
+
+:creator a owl:DatatypeProperty ;
+	rdfs:range xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#description
+
+:description a owl:DatatypeProperty ;
+	rdfs:range xsd:string ;
+	rdfs:comment "A description. This is meta information. The content is in property text."^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text
+
+:text a owl:DatatypeProperty ;
+	rdfs:range xsd:string ;
+	rdfs:comment "The content of the node."^^xsd:string .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Backing
+
+:Backing a owl:Class ;
+	rdfs:subClassOf :I-Node ;
+	rdfs:comment "The backing supports the warrant; it acts as evidence for the warrant."^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim
+
+:Claim a owl:Class ;
+	rdfs:subClassOf :I-Node ;
+	rdfs:comment "The assertion that the argument backs."^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Data
+
+:Data a owl:Class ;
+	rdfs:subClassOf :I-Node ;
+	rdfs:comment "The evidence (e.g. fact, an example, statistics) that supports the claim."^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#I-Node
+
+:I-Node a owl:Class ;
+	rdfs:comment "For compatibility with AIF https://arg-tech.org/wp-content/uploads/AIF.owl"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Qualifier
+
+:Qualifier a owl:Class ;
+	rdfs:subClassOf :I-Node ;
+	rdfs:comment "Qualiﬁes the conditions under which the argument holds."^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#QualifierApplication
+
+:QualifierApplication a owl:Class ;
+	rdfs:subClassOf :RA-Node .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#RA-Node
+
+:RA-Node a owl:Class ;
+	rdfs:subClassOf :S-Node ;
+	rdfs:comment "This for compatibility with AIF  https://arg-tech.org/wp-content/uploads/AIF.owl"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Rebuttal
+
+:Rebuttal a owl:Class ;
+	rdfs:subClassOf :I-Node ;
+	rdfs:comment "A rebuttal is an argument that might be made against the claim"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#RebuttalApplication
+
+:RebuttalApplication a owl:Class ;
+	rdfs:subClassOf :RA-Node .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#S-Node
+
+:S-Node a owl:Class ;
+	rdfs:comment "This for compatibility with AIF  https://arg-tech.org/wp-content/uploads/AIF.owl"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#ToulminArgument
+
+:ToulminArgument a owl:Class ;
+	owl:equivalentClass _:genid9 .
+
+_:genid9 owl:intersectionOf _:genid14 .
+
+_:genid14 a rdf:List ;
+	rdf:first _:genid15 .
+
+_:genid15 a owl:Restriction ;
+	owl:onProperty :hasBacking ;
+	owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :Backing .
+
+_:genid14 rdf:rest _:genid12 .
+
+_:genid12 a rdf:List ;
+	rdf:first _:genid13 .
+
+_:genid13 a owl:Restriction ;
+	owl:onProperty :hasData ;
+	owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :Data .
+
+_:genid12 rdf:rest _:genid10 .
+
+_:genid10 a rdf:List ;
+	rdf:first _:genid11 .
+
+_:genid11 a owl:Restriction ;
+	owl:onProperty :hasClaim ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :Claim .
+
+_:genid10 rdf:rest rdf:nil .
+
+_:genid9 a owl:Class .
+
+:ToulminArgument rdfs:comment "An argument must have exactly one claim, Warrant, and Qualifier, and minimally one Data and 1 Backing."^^xsd:string .
+
+_:genid16 a owl:Axiom ;
+	owl:annotatedSource :ToulminArgument ;
+	owl:annotatedProperty owl:equivalentClass ;
+	owl:annotatedTarget _:genid9 ;
+	rdfs:comment "Check this because constraint does not catch the two claims for _Argument01."^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Warrant
+
+:Warrant a owl:Class ;
+	rdfs:subClassOf :RA-Node .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TArgument01
+
+:_TArgument01 a owl:NamedIndividual , :ToulminArgument ;
+	:hasBacking :_TBacking01 ;
+	:hasClaim :_TClaim01 ;
+	:hasData :_TData01 ;
+	:hasQualifier :_TQualifier01 ;
+	:hasRebuttal :_TRebuttal01 .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TBacking01
+
+:_TBacking01 a owl:NamedIndividual , :Backing ;
+	:text "Correlations indicate that there are systematic relations between variables"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim01
+
+:_TClaim01 a owl:NamedIndividual , :Claim ;
+	:text "Epistemic reflection produces demands for justification"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TClaim02
+
+:_TClaim02 a owl:NamedIndividual , :Claim ;
+	:text "The design features f1, f2, f3 in concertation will lead to growth in scientific argumentation"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TData01
+
+:_TData01 a owl:NamedIndividual , :Data ;
+	:text "Observed an increase in requsted justifications after students in pilot study reflected"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TQualifier01
+
+:_TQualifier01 a owl:NamedIndividual , :Qualifier ;
+	:text "Provided that learners have a verbal intelligence score > 90"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TQualifier02
+
+:_TQualifier02 a owl:NamedIndividual , :Qualifier ;
+	:text "Only applies when numerical intelligence GT 110"^^xsd:string .
+# 
+# http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TRebuttal01
+
+:_TRebuttal01 a owl:NamedIndividual , :Rebuttal ;
+	:text "Study B finds no relation between reflection and request for justifications"^^xsd:string .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    General axioms
+# #
+# #################################################################
+# 
+# 
+
+_:genid17 a owl:AllDisjointClasses ;
+	owl:members _:genid22 .
+
+_:genid22 a rdf:List ;
+	rdf:first :Backing ;
+	rdf:rest _:genid21 .
+
+_:genid21 a rdf:List ;
+	rdf:first :Claim ;
+	rdf:rest _:genid20 .
+
+_:genid20 a rdf:List ;
+	rdf:first :Data ;
+	rdf:rest _:genid19 .
+
+_:genid19 a rdf:List ;
+	rdf:first :Qualifier ;
+	rdf:rest _:genid18 .
+
+_:genid18 a rdf:List ;
+	rdf:first :Rebuttal ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid23 a owl:AllDisjointClasses ;
+	owl:members _:genid26 .
+
+_:genid26 a rdf:List ;
+	rdf:first :QualifierApplication ;
+	rdf:rest _:genid25 .
+
+_:genid25 a rdf:List ;
+	rdf:first :RebuttalApplication ;
+	rdf:rest _:genid24 .
+
+_:genid24 a rdf:List ;
+	rdf:first :Warrant ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid27 a owl:AllDifferent ;
+	owl:distinctMembers _:genid29 .
+
+_:genid29 a rdf:List ;
+	rdf:first :_TQualifier01 ;
+	rdf:rest _:genid28 .
+
+_:genid28 a rdf:List ;
+	rdf:first :_TQualifier02 ;
+	rdf:rest rdf:nil .
+# 
+# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
