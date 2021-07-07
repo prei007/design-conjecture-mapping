@@ -231,16 +231,6 @@
                                                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                                               owl:onClass :Claim
                                                             ]
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :hasQualifier ;
-                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                              owl:onClass :Qualifier
-                                                            ]
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :hasWarrant ;
-                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                              owl:onClass :Warrant
-                                                            ]
                                                           ) ;
                                        rdf:type owl:Class
                                      ] ;
@@ -263,16 +253,6 @@
                                                 owl:onProperty :hasClaim ;
                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                                 owl:onClass :Claim
-                                              ]
-                                              [ rdf:type owl:Restriction ;
-                                                owl:onProperty :hasQualifier ;
-                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                owl:onClass :Qualifier
-                                              ]
-                                              [ rdf:type owl:Restriction ;
-                                                owl:onProperty :hasWarrant ;
-                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                owl:onClass :Warrant
                                               ]
                                             ) ;
                          rdf:type owl:Class
