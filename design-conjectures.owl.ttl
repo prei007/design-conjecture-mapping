@@ -88,12 +88,14 @@ In the future, it would be good to model the difference between necessary and su
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#sufficientForOutcome
 :sufficientForOutcome rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf :hasOutcome .
+                      rdfs:subPropertyOf :hasOutcome ;
+                      rdf:type owl:FunctionalProperty .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#sufficientTrigger
 :sufficientTrigger rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf :triggersProcess .
+                   rdfs:subPropertyOf :triggersProcess ;
+                   rdf:type owl:FunctionalProperty .
 
 
 #################################################################
