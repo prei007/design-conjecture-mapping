@@ -59,6 +59,10 @@
             rdfs:range :Outcome .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures#hasPrinciple
+:hasPrinciple rdf:type owl:ObjectProperty .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures#necessaryForOutcome
 :necessaryForOutcome rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf :hasOutcome .
@@ -71,7 +75,6 @@
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#respondsTo
 :respondsTo rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf owl:topObjectProperty ;
             rdfs:comment "For instance, a LearningDesign responds to an InstructionalChallenge"^^xsd:string .
 
 
@@ -96,10 +99,6 @@
 This reflects the fact that a MediatingProcess often will describe the *interaction* of DesignFeatures. 
 
 In the future, it would be good to model the difference between necessary and sufficient relations. Also for the relation between MediatingProcess and Outcome."""^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasPrinciple
-:hasPrinciple rdf:type owl:ObjectProperty .
 
 
 #################################################################
@@ -151,10 +150,21 @@ Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#DesignElement
 :DesignElement rdf:type owl:Class ;
-               owl:disjointWith :MediatingProcess ,
-                                :Outcome ,
-                                :DesignPrinciple ;
+               owl:disjointWith :DesignPrinciple ,
+                                :MediatingProcess ,
+                                :Outcome ;
                rdfs:comment "DesignFeature is what Sandoval calls Embodiment. it is the hook to link to designs and design models. For the moment, the relation to design (models) outside of dcon can be established with dcterms:relation."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#DesignPrinciple
+:DesignPrinciple rdf:type owl:Class ;
+                 owl:disjointWith :MediatingProcess ,
+                                  :Outcome ;
+                 rdfs:comment "Current implementation: The propert hasPrinciple links a DesignFeature to a DesignPrinciple."^^xsd:string ,
+                              """Higher-order principles, or patterns, that reflect prior experience with learning desings.
+
+Suggested in: Wu, J., & Chen, V. D. T. (2018). Refining conjecture mapping for design-based research. Paper presented at the ICCE 2018 - 26th International Conference on Computers in Education, Main Conference Proceedings."""^^xsd:string ;
+                 rdfs:seeAlso "https://repository.nie.edu.sg/bitstream/10497/22839/1/ICCE-2018-767.pdf"^^xsd:anyURI .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#DiscoursePractice
@@ -186,8 +196,7 @@ Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#MediatingProcess
 :MediatingProcess rdf:type owl:Class ;
-                  owl:disjointWith :Outcome ,
-                                   :DesignPrinciple .
+                  owl:disjointWith :Outcome .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#MotivationOutcome
@@ -216,13 +225,18 @@ Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping 
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#Outcome
-:Outcome rdf:type owl:Class ;
-         owl:disjointWith :DesignPrinciple .
+:Outcome rdf:type owl:Class .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#ParticipantArtifact
 :ParticipantArtifact rdf:type owl:Class ;
                      rdfs:subClassOf :MediatingProcess .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures#ResearchChallenge
+:ResearchChallenge rdf:type owl:Class ;
+                   rdfs:subClassOf :Challenge ;
+                   rdfs:comment "The bigger research question that the design research addresses."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures#RolesAndResponsibilities
@@ -250,21 +264,6 @@ Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping 
 ###  http://coolfutures.net/rdf/Design_Conjectures#Tool
 :Tool rdf:type owl:Class ;
       rdfs:subClassOf :DesignElement .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#DesignPrinciple
-:DesignPrinciple rdf:type owl:Class ;
-                 rdfs:comment "Current implementation: The propert hasPrinciple links a DesignFeature to a DesignPrinciple."^^xsd:string ,
-                              """Higher-order principles, or patterns, that reflect prior experience with learning desings.
-
-Suggested in: Wu, J., & Chen, V. D. T. (2018). Refining conjecture mapping for design-based research. Paper presented at the ICCE 2018 - 26th International Conference on Computers in Education, Main Conference Proceedings."""^^xsd:string ;
-                 rdfs:seeAlso "https://repository.nie.edu.sg/bitstream/10497/22839/1/ICCE-2018-767.pdf"^^xsd:anyURI .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#ResearchChallenge
-:ResearchChallenge rdf:type owl:Class ;
-                   rdfs:subClassOf :Challenge ;
-                   rdfs:comment "The bigger research question that the design research addresses."^^xsd:string .
 
 
 #################################################################
