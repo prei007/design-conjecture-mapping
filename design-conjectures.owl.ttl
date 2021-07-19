@@ -111,6 +111,11 @@ In the future, it would be good to model the difference between necessary and su
                                              owl:FunctionalProperty .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> rdfs:domain dcon:Conjecture ;
+                                                                            rdfs:seeAlso "https://repository.isls.org/bitstream/1/1194/1/78-85.pdf"^^xsd:anyURI .
+
+
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> rdf:type owl:FunctionalProperty .
 
@@ -410,9 +415,6 @@ For instance, could work with the value of the data property beliefStatus."""^^x
 
 
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TArgument01> rdfs:comment "A Toulmin style argument, hence the T"^^xsd:string .
-
-
-<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> rdfs:seeAlso "https://repository.isls.org/bitstream/1/1194/1/78-85.pdf"^^xsd:anyURI .
 
 
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#creator> rdfs:comment "One or more people who have created or contributed."^^xsd:string .
