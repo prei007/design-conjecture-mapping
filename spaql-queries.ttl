@@ -9,14 +9,6 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX targ: <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#>
 PREFIX : <http://coolfutures.net/rdf/Design_Conjectures/dcon#>
 
-## Conjecture connected to this learning design
-
-Select ?design ?conjecture
-where
-{
-    ?design a :LearningDesign . 
-    ?design :hasConjecture ?conjecture . 
-}
 
 ## All conjectures in this (the default) graph
 
