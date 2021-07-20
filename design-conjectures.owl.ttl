@@ -10,8 +10,8 @@
 <http://www.coolfutures.net/rdf/Design_Conjectures/dcon#> rdf:type owl:Ontology ;
                                                            owl:imports <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#> ;
                                                            <http://purl.org/dc/terms/creator> "Peter Reimann"^^xsd:string ;
-                                                           rdfs:comment "Initial work on an ontology for design conjecture claims."@en ;
-                                                           owl:versionInfo "version 1.0"^^xsd:string .
+                                                           rdfs:comment "Initial work on an ontology for design conjecture mapping."@en ;
+                                                           owl:versionInfo "version 0.1"^^xsd:string .
 
 #################################################################
 #    Annotation properties
@@ -102,6 +102,11 @@ This reflects the fact that a MediatingProcess often will describe the *interact
 In the future, it would be good to model the difference between necessary and sufficient relations. Also for the relation between MediatingProcess and Outcome."""^^xsd:string .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#refinedVersion
+:refinedVersion rdf:type owl:ObjectProperty ;
+                rdfs:comment "Conjectures and DesignElements can have refined versions. There can be a chain of such refinements."@en .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -109,6 +114,12 @@ In the future, it would be good to model the difference between necessary and su
 ###  http://purl.org/dc/terms/relation
 <http://purl.org/dc/terms/relation> rdf:type owl:DatatypeProperty ,
                                              owl:FunctionalProperty .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#creationTime
+:creationTime rdf:type owl:DatatypeProperty ;
+              rdfs:range xsd:dateTime ;
+              rdfs:comment "The simplified date-time format is yyyy-mm-ddThh:mm:ss. For instace: 1994-01-25T21:32:52. It must be complete to be valid, that is, include seconds."^^xsd:string .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
@@ -384,7 +395,8 @@ dcon:_Outcome01 rdf:type owl:NamedIndividual ,
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_PedagogyConjecture01
-dcon:_PedagogyConjecture01 rdf:type owl:NamedIndividual ;
+dcon:_PedagogyConjecture01 rdf:type owl:NamedIndividual ,
+                                    dcon:Conjecture ;
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking> dcon:_Backing01 ,
                                                                                                      dcon:_Backing02 ;
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> dcon:_Claim01 .
