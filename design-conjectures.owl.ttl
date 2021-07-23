@@ -103,7 +103,8 @@ In the future, it would be good to model the difference between necessary and su
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#refinedVersion
-:refinedVersion rdf:type owl:ObjectProperty ;
+:refinedVersion rdf:type owl:ObjectProperty ,
+                         owl:TransitiveProperty ;
                 rdfs:comment "Conjectures and DesignElements can have refined versions. There can be a chain of such refinements."@en .
 
 
