@@ -18,7 +18,8 @@ where
     ?s :hasConjecture ?conjecture . 
 }
 
-## 
+
+# with claim text
 
 Select ?s ?conjecture ?text
 where
@@ -27,3 +28,24 @@ where
     ?conjecture targ:hasClaim ?claim . 
     OPTIONAL {?claim targ:text ?text . }
 }
+
+###  Answering the competence questions
+
+## Q1: What solutions for instructional and research challenges? 
+
+
+Select ?challenge ?cmap ?text
+where
+{
+    ?challenge a (:InstructionalChallenge | :ResearchChallenge) . 
+    ?cmap :respondsTo :challenge . 
+    OPTIONAL {?cmap :text ?text . }
+}
+
+
+
+
+
+
+
+
