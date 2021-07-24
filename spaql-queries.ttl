@@ -29,6 +29,14 @@ where
     OPTIONAL {?claim targ:text ?text . }
 }
 
+Select ?challenge ?cmap ?text
+where
+{
+    ?challenge a :InstructionalChallenge . 
+    ?cmap :respondsTo ?challenge . 
+    OPTIONAL {?cmap :cmText ?text . }
+}
+
 ###  Answering the competence questions
 
 ## Q1: What solutions for instructional and research challenges? 
