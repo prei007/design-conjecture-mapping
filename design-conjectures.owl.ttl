@@ -112,6 +112,12 @@ In the future, it would be good to model the difference between necessary and su
 #    Data properties
 #################################################################
 
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#cmText
+dcon:cmText rdf:type owl:DatatypeProperty ;
+            rdfs:comment "Any text content that goes with conjeture map elements. To be distinguised from targ:text."@en ;
+            rdfs:seeAlso "text in the toulmin arg ontology"@en .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#creationTime
 dcon:creationTime rdf:type owl:DatatypeProperty ;
                   rdfs:range xsd:dateTime ;
@@ -121,12 +127,6 @@ dcon:creationTime rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/dc/terms/relation
 <http://purl.org/dc/terms/relation> rdf:type owl:DatatypeProperty ,
                                              owl:FunctionalProperty .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#cmText
-:cmText rdf:type owl:DatatypeProperty ;
-        rdfs:comment "Any text content that goes with conjeture map elements. To be distinguised from targ:text."@en ;
-        rdfs:seeAlso "text in the toulmin arg ontology"@en .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
@@ -338,7 +338,7 @@ dcon:_ConjectureMap01 rdf:type owl:NamedIndividual ,
                       dcon:hasDesignElement dcon:_DesignElementCollaborativeInquiry ,
                                             dcon:_DesignElementReflectiveJournal ;
                       dcon:respondsTo dcon:_InstructionalChallenge01 ;
-                      :cmText "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
+                      dcon:cmText "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjectureReflectiveJournal
@@ -348,13 +348,13 @@ dcon:_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> dcon:_MeasureOfReflexivity ;
                                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> dcon:_QualifierFromTechConstraint ,
                                                                                                                     dcon:_QualifierWritingLiteracy ;
-                                        :cmText "The gist of the conjecture"^^xsd:string .
+                                        dcon:cmText "The gist of the conjecture"^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignElementCollaborativeInquiry
 dcon:_DesignElementCollaborativeInquiry rdf:type owl:NamedIndividual ,
                                                  dcon:DiscoursePractice ;
-                                        :cmText "Integer quis nulla in est ultrices condimentum in sit amet arcu."^^xsd:string .
+                                        dcon:cmText "Integer quis nulla in est ultrices condimentum in sit amet arcu."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignElementReflectiveJournal
@@ -362,13 +362,13 @@ dcon:_DesignElementReflectiveJournal rdf:type owl:NamedIndividual ,
                                               dcon:DiscoursePractice ;
                                      dcon:hasConjecture dcon:_DesignConjectureReflectiveJournal ;
                                      dcon:triggersProcess dcon:_MediatingProcessReflectiveJournal ;
-                                     :cmText "How the design feature ReflectiveJournal will get implemented in this learning environment...link to the respective document, on Dropbox for instance."^^xsd:string .
+                                     dcon:cmText "How the design feature ReflectiveJournal will get implemented in this learning environment...link to the respective document, on Dropbox for instance."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_InstructionalChallenge01
 dcon:_InstructionalChallenge01 rdf:type owl:NamedIndividual ,
                                         dcon:InstructionalChallenge ;
-                               :cmText "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
+                               dcon:cmText "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournal
@@ -422,6 +422,12 @@ dcon:_QualifierFromTechConstraint rdf:type owl:NamedIndividual ,
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierWritingLiteracy
 dcon:_QualifierWritingLiteracy rdf:type owl:NamedIndividual ;
                                <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Only for students who can write on Level 5 as per national writing assessment."^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_ResearchChallenge01
+:_ResearchChallenge01 rdf:type owl:NamedIndividual ,
+                               dcon:ResearchChallenge ;
+                      dcon:cmText "Ut sollicitudin molestie dolor, nec pulvinar nunc sagittis vitae. Nam sit amet ante eros"^^xsd:string .
 
 
 #################################################################
