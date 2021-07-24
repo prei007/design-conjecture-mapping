@@ -74,6 +74,12 @@ dcon:necessaryTrigger rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf dcon:triggersProcess .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#refinedVersion
+dcon:refinedVersion rdf:type owl:ObjectProperty ,
+                             owl:TransitiveProperty ;
+                    rdfs:comment "Conjectures and DesignElements can have refined versions. There can be a chain of such refinements."@en .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#respondsTo
 dcon:respondsTo rdf:type owl:ObjectProperty ;
                 rdfs:comment "For instance, a LearningDesign responds to an InstructionalChallenge"^^xsd:string .
@@ -102,25 +108,25 @@ This reflects the fact that a MediatingProcess often will describe the *interact
 In the future, it would be good to model the difference between necessary and sufficient relations. Also for the relation between MediatingProcess and Outcome."""^^xsd:string .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#refinedVersion
-:refinedVersion rdf:type owl:ObjectProperty ,
-                         owl:TransitiveProperty ;
-                rdfs:comment "Conjectures and DesignElements can have refined versions. There can be a chain of such refinements."@en .
-
-
 #################################################################
 #    Data properties
 #################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#creationTime
+dcon:creationTime rdf:type owl:DatatypeProperty ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:comment "The simplified date-time format is yyyy-mm-ddThh:mm:ss. For instace: 1994-01-25T21:32:52. It must be complete to be valid, that is, include seconds."^^xsd:string .
+
 
 ###  http://purl.org/dc/terms/relation
 <http://purl.org/dc/terms/relation> rdf:type owl:DatatypeProperty ,
                                              owl:FunctionalProperty .
 
 
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#creationTime
-:creationTime rdf:type owl:DatatypeProperty ;
-              rdfs:range xsd:dateTime ;
-              rdfs:comment "The simplified date-time format is yyyy-mm-ddThh:mm:ss. For instace: 1994-01-25T21:32:52. It must be complete to be valid, that is, include seconds."^^xsd:string .
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#cmText
+:cmText rdf:type owl:DatatypeProperty ;
+        rdfs:comment "Any text content that goes with conjeture map elements. To be distinguised from targ:text."@en ;
+        rdfs:seeAlso "text in the toulmin arg ontology"@en .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
@@ -332,7 +338,7 @@ dcon:_ConjectureMap01 rdf:type owl:NamedIndividual ,
                       dcon:hasDesignElement dcon:_DesignElementCollaborativeInquiry ,
                                             dcon:_DesignElementReflectiveJournal ;
                       dcon:respondsTo dcon:_InstructionalChallenge01 ;
-                      <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
+                      :cmText "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjectureReflectiveJournal
@@ -342,12 +348,13 @@ dcon:_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> dcon:_MeasureOfReflexivity ;
                                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> dcon:_QualifierFromTechConstraint ,
                                                                                                                     dcon:_QualifierWritingLiteracy ;
-                                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
+                                        :cmText "The gist of the conjecture"^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignElementCollaborativeInquiry
 dcon:_DesignElementCollaborativeInquiry rdf:type owl:NamedIndividual ,
-                                                 dcon:DiscoursePractice .
+                                                 dcon:DiscoursePractice ;
+                                        :cmText "Integer quis nulla in est ultrices condimentum in sit amet arcu."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignElementReflectiveJournal
@@ -355,20 +362,21 @@ dcon:_DesignElementReflectiveJournal rdf:type owl:NamedIndividual ,
                                               dcon:DiscoursePractice ;
                                      dcon:hasConjecture dcon:_DesignConjectureReflectiveJournal ;
                                      dcon:triggersProcess dcon:_MediatingProcessReflectiveJournal ;
-                                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "How the design feature ReflectiveJournal will get implemented in this learning environment...link to the respective document, on Dropbox for instance."^^xsd:string .
+                                     :cmText "How the design feature ReflectiveJournal will get implemented in this learning environment...link to the respective document, on Dropbox for instance."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_InstructionalChallenge01
 dcon:_InstructionalChallenge01 rdf:type owl:NamedIndividual ,
                                         dcon:InstructionalChallenge ;
-                               <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
+                               :cmText "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournal
 dcon:_LearningConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                                    dcon:Conjecture ;
                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> dcon:_Claim04 ;
-                                          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> dcon:_Outcome01 .
+                                          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> dcon:_Outcome01 ;
+                                          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Maecenas tellus enim, tempus at risus nec, varius viverra diam."^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MeasureOfReflexivity
@@ -400,7 +408,8 @@ dcon:_PedagogyConjecture01 rdf:type owl:NamedIndividual ,
                                     dcon:Conjecture ;
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking> dcon:_Backing01 ,
                                                                                                      dcon:_Backing02 ;
-                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> dcon:_Claim01 .
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> dcon:_Claim01 ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Phasellus eget ornare sem, eu tempus lacus"^^xsd:string .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierFromTechConstraint
