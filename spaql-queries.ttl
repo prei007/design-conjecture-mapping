@@ -94,7 +94,7 @@ where
 # How do we find all conjectures of a cmap?
 # We need to go backwards, starting with the outcome 
 
-Select ?conjecture1 ?conjecture2 ?conjecture3 ?cmap
+Select ?cmap ?designelem ?conjecture3 ?conjecture2 ?conjecture1 
 where 
 {
   ?medproc :hasOutcome ?outcome . 
@@ -104,11 +104,12 @@ where
   ?cmap :hasDesignElement ?designelem . 
   ?cmap :hasConjecture ?conjecture3 . 
  }
+ ORDER BY ?cmap
  
 # Now the beliefStatus
 # This returns "paths" of beliefStatus values and the cmap name. 
 
-Select ?b1 ?b2 ?b3 ?cmap
+Select ?cmap ?designelem ?b3 ?b2 ?b1 
 where 
 {
   ?medproc :hasOutcome ?outcome . 
@@ -121,18 +122,42 @@ where
   ?cmap :hasConjecture ?conjecture3 . 
   ?conjecture3 targ:beliefStatus ?b3 .
  }
+ ORDER BY ?cmap
  
  # It would be best to get counts first. 
  
- # But the table is wide, so that is not so easy. It needs a construct action to get the data in the right format, which is cmaps wide and categrories long. 
+# First step: put data into Long format:
  
  
- 
- 
- 
- # From this we transform to numbers
- # unsup = 1/partial = 2/ fully = 3
- 
+
+CONSTRUCT  {
+	?cmap ?conjecture1 ?b1 . 
+	?cmap ?conjecture2 ?b2 .
+	?cmap ?conjecture3 ?b3 .
+}
+
+where 
+{
+  ?medproc :hasOutcome ?outcome . 
+  ?medproc :hasConjecture ?conjecture1 .
+  ?conjecture1 targ:beliefStatus ?b1 .
+  ?designelem :triggersProcess ?medproc . 
+  ?designelem :hasConjecture ?conjecture2 .  
+  ?conjecture2 targ:beliefStatus ?b2 .
+  ?cmap :hasDesignElement ?designelem . 
+  ?cmap :hasConjecture ?conjecture3 . 
+  ?conjecture3 targ:beliefStatus ?b3 .
+} 
+
+
+# Second step: Tabulate
+
+
+
+
+
+# Third step: compute a score
+
 Select ?b1num ?b2num ?b3num ?cmap
 where 
 {
@@ -150,17 +175,7 @@ where
  BIND (IF(?b3 = "fully-supported", 3, (IF(?b3 = "partially-supported", 2, 1))) As ?b3num )
  } 
 ORDER BY ?cmap
- 
- 
- 
- 
- # 1 = loweest 3 = highest 
- 
- # sum over and divide by 3.
- # and what to with multiple paths of one cmap? 
- # Need to keep a count and divide by count.
- 
-# We need to do construction. 
+
  
 
 

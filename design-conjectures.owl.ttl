@@ -331,6 +331,13 @@ dcon:_Claim04 rdf:type owl:NamedIndividual ;
               <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Writing helps with remembering content."^^xsd:string .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_ConceptMapApp01
+dcon:_ConceptMapApp01 rdf:type owl:NamedIndividual ,
+                               dcon:Tool ;
+                      dcon:hasConjecture dcon:_DesignConjecture02 ;
+                      dcon:triggersProcess dcon:_MedProcessWriting01 .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_ConjectureMap01
 dcon:_ConjectureMap01 rdf:type owl:NamedIndividual ,
                                dcon:DesignConjectureMap ;
@@ -340,6 +347,27 @@ dcon:_ConjectureMap01 rdf:type owl:NamedIndividual ,
                       dcon:respondsTo dcon:_InstructionalChallenge01 ,
                                       dcon:_ResearchChallenge01 ;
                       dcon:cmText "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_ConjectureMap02
+dcon:_ConjectureMap02 rdf:type owl:NamedIndividual ,
+                               dcon:DesignConjectureMap ;
+                      dcon:hasConjecture dcon:_PedagogyConjecture02 ;
+                      dcon:hasDesignElement dcon:_ConceptMapApp01 ;
+                      dcon:respondsTo dcon:_InstructionalChallenge02 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjecture02
+dcon:_DesignConjecture02 rdf:type owl:NamedIndividual ,
+                                  dcon:Conjecture ;
+                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjectureCollaborativeInquiry
+dcon:_DesignConjectureCollaborativeInquiry rdf:type owl:NamedIndividual ,
+                                                    dcon:Conjecture ;
+                                           dcon:hasConjecture dcon:_DesignConjectureCollaborativeInquiry ;
+                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjectureReflectiveJournal
@@ -356,8 +384,8 @@ dcon:_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignElementCollaborativeInquiry
 dcon:_DesignElementCollaborativeInquiry rdf:type owl:NamedIndividual ,
                                                  dcon:DiscoursePractice ;
-                                        dcon:hasConjecture :_MedProcessDiscussion01 ;
-                                        dcon:triggersProcess :_MedProcessDiscussion01 ;
+                                        dcon:hasConjecture dcon:_DesignConjectureCollaborativeInquiry ;
+                                        dcon:triggersProcess dcon:_MedProcessDiscussion01 ;
                                         dcon:cmText "Integer quis nulla in est ultrices condimentum in sit amet arcu."^^xsd:string .
 
 
@@ -375,14 +403,36 @@ dcon:_InstructionalChallenge01 rdf:type owl:NamedIndividual ,
                                dcon:cmText "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_InstructionalChallenge02
+dcon:_InstructionalChallenge02 rdf:type owl:NamedIndividual ,
+                                        dcon:InstructionalChallenge .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureCollaborativeInquiry
+dcon:_LearningConjectureCollaborativeInquiry rdf:type owl:NamedIndividual ,
+                                                      dcon:Conjecture ;
+                                             <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournal
 dcon:_LearningConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
                                                    dcon:Conjecture ;
-                                          dcon:refinedVersion :_LearningConjectureReflectiveJournalv2 ;
+                                          dcon:refinedVersion dcon:_LearningConjectureReflectiveJournalv2 ;
                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> dcon:_Claim04 ;
                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> dcon:_Outcome01 ;
                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" ;
                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Maecenas tellus enim, tempus at risus nec, varius viverra diam."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournalv2
+dcon:_LearningConjectureReflectiveJournalv2 rdf:type owl:NamedIndividual ,
+                                                     dcon:Conjecture ;
+                                            dcon:refinedVersion dcon:_LearningConjectureReflectiveJournalv3 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournalv3
+dcon:_LearningConjectureReflectiveJournalv3 rdf:type owl:NamedIndividual ,
+                                                     dcon:Conjecture .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MeasureOfReflexivity
@@ -395,6 +445,20 @@ dcon:_MeasurementScale01 rdf:type owl:NamedIndividual ,
                                   dcon:Scale .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MedProcessDiscussion01
+dcon:_MedProcessDiscussion01 rdf:type owl:NamedIndividual ,
+                                      dcon:Observable ;
+                             dcon:hasConjecture dcon:_LearningConjectureCollaborativeInquiry ;
+                             dcon:hasOutcome dcon:_Outcome02 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MedProcessWriting01
+dcon:_MedProcessWriting01 rdf:type owl:NamedIndividual ,
+                                   dcon:Observable ;
+                          dcon:hasConjecture dcon:_MediationConjecture02 ;
+                          dcon:hasOutcome dcon:_Outcome02 .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MediatingProcessReflectiveJournal
 dcon:_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ,
                                                  dcon:ParticipantArtifact ;
@@ -403,10 +467,21 @@ dcon:_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ,
                                         dcon:hasOutcome dcon:_Outcome01 .
 
 
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MediationConjecture02
+dcon:_MediationConjecture02 rdf:type owl:NamedIndividual ,
+                                     dcon:Conjecture ;
+                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "unsupported" .
+
+
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Outcome01
 dcon:_Outcome01 rdf:type owl:NamedIndividual ,
                          dcon:LearningOutcome ;
                 dcon:hasMeasure dcon:_MeasurementScale01 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Outcome02
+dcon:_Outcome02 rdf:type owl:NamedIndividual ,
+                         dcon:LearningOutcome .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_PedagogyConjecture01
@@ -417,6 +492,12 @@ dcon:_PedagogyConjecture01 rdf:type owl:NamedIndividual ,
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> dcon:_Claim01 ;
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "fully-supported" ;
                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Phasellus eget ornare sem, eu tempus lacus"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_PedagogyConjecture02
+dcon:_PedagogyConjecture02 rdf:type owl:NamedIndividual ,
+                                    dcon:Conjecture ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "unsupported" .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierFromTechConstraint
@@ -435,86 +516,6 @@ dcon:_QualifierWritingLiteracy rdf:type owl:NamedIndividual ;
 dcon:_ResearchChallenge01 rdf:type owl:NamedIndividual ,
                                    dcon:ResearchChallenge ;
                           dcon:cmText "Ut sollicitudin molestie dolor, nec pulvinar nunc sagittis vitae. Nam sit amet ante eros"^^xsd:string .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_ConceptMapApp01
-:_ConceptMapApp01 rdf:type owl:NamedIndividual ,
-                           dcon:Tool ;
-                  dcon:hasConjecture :_DesignConjecture02 ;
-                  dcon:triggersProcess :_MedProcessWriting01 .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_ConjectureMap02
-:_ConjectureMap02 rdf:type owl:NamedIndividual ,
-                           dcon:DesignConjectureMap ;
-                  dcon:hasConjecture :_PedagogyConjecture02 ;
-                  dcon:hasDesignElement :_ConceptMapApp01 ;
-                  dcon:respondsTo :_InstructionalChallenge02 .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjecture02
-:_DesignConjecture02 rdf:type owl:NamedIndividual ,
-                              dcon:Conjecture ;
-                     <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjectureCollaborativeInquiry
-:_DesignConjectureCollaborativeInquiry rdf:type owl:NamedIndividual ,
-                                                dcon:Conjecture ;
-                                       dcon:hasConjecture :_DesignConjectureCollaborativeInquiry ;
-                                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_InstructionalChallenge02
-:_InstructionalChallenge02 rdf:type owl:NamedIndividual ,
-                                    dcon:InstructionalChallenge .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureCollaborativeInquiry
-:_LearningConjectureCollaborativeInquiry rdf:type owl:NamedIndividual ,
-                                                  dcon:Conjecture .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournalv2
-:_LearningConjectureReflectiveJournalv2 rdf:type owl:NamedIndividual ,
-                                                 dcon:Conjecture ;
-                                        dcon:refinedVersion :_LearningConjectureReflectiveJournalv3 .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournalv3
-:_LearningConjectureReflectiveJournalv3 rdf:type owl:NamedIndividual ,
-                                                 dcon:Conjecture .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_MedProcessDiscussion01
-:_MedProcessDiscussion01 rdf:type owl:NamedIndividual ,
-                                  dcon:Observable ;
-                         dcon:hasConjecture :_LearningConjectureCollaborativeInquiry ;
-                         dcon:hasOutcome :_Outcome02 .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_MedProcessWriting01
-:_MedProcessWriting01 rdf:type owl:NamedIndividual ,
-                               dcon:Observable ;
-                      dcon:hasConjecture :_MediationConjecture02 ;
-                      dcon:hasOutcome :_Outcome02 .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_MediationConjecture02
-:_MediationConjecture02 rdf:type owl:NamedIndividual ,
-                                 dcon:Conjecture ;
-                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "unsupported" .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_Outcome02
-:_Outcome02 rdf:type owl:NamedIndividual ,
-                     dcon:LearningOutcome .
-
-
-###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#_PedagogyConjecture02
-:_PedagogyConjecture02 rdf:type owl:NamedIndividual ,
-                                dcon:Conjecture ;
-                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "unsupported" .
 
 
 #################################################################
