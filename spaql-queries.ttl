@@ -149,34 +149,61 @@ where
   ?conjecture3 targ:beliefStatus ?b3 .
 } 
 
+## NOTE: This will need to be INSERTed for the rest to work! 
 
 # Second step: Tabulate
+# After insertion of the above we can tabulate 
 
+SELECT ?cmap ?element ?status 
+WHERE 
 
+{ ?cmap a :DesignConjectureMap . 
+  ?cmap ?element ?status.
+ VALUES ?status {"fully-supported" "partially-supported" "unsupported"} 
+} 
+ORDER BY ?cmap
+
+# and count: 
+
+SELECT ?cmap ?status (COUNT(?status) as ?fstatus)
+WHERE 
+
+{ ?cmap a :DesignConjectureMap . 
+  ?cmap ?element ?status.
+ VALUES ?status {"fully-supported" "partially-supported" "unsupported"} 
+} 
+
+Group BY ?status ?cmap
 
 
 
 # Third step: compute a score
+# sum:
 
-Select ?b1num ?b2num ?b3num ?cmap
-where 
-{
-  ?medproc :hasOutcome ?outcome . 
-  ?medproc :hasConjecture ?conjecture1 .
-  ?conjecture1 targ:beliefStatus ?b1 .
-  ?designelem :triggersProcess ?medproc . 
-  ?designelem :hasConjecture ?conjecture2 .  
-  ?conjecture2 targ:beliefStatus ?b2 .
-  ?cmap :hasDesignElement ?designelem . 
-  ?cmap :hasConjecture ?conjecture3 . 
-  ?conjecture3 targ:beliefStatus ?b3 .
- BIND (IF(?b1 = "fully-supported", 3, (IF(?b1 = "partially-supported", 2, 1))) As ?b1num ) 
- BIND (IF(?b2 = "fully-supported", 3, (IF(?b2 = "partially-supported", 2, 1))) As ?b2num )
- BIND (IF(?b3 = "fully-supported", 3, (IF(?b3 = "partially-supported", 2, 1))) As ?b3num )
- } 
-ORDER BY ?cmap
 
- 
+SELECT ?cmap (SUM(?statusScore) AS ?sumStatus)
+WHERE 
+
+{ ?cmap a :DesignConjectureMap . 
+  ?cmap ?element ?status.
+  VALUES ?status {"fully-supported" "partially-supported" "unsupported"}
+  BIND (IF(?status = "fully-supported", 3, (IF(?status = "partially-supported", 2, 1))) As ?statusScore ) 
+} 
+                       
+GROUP BY ?cmap
+
+# Average
+
+SELECT ?cmap (ROUND(AVG(?statusScore)) AS ?sumStatus)
+WHERE 
+
+{ ?cmap a :DesignConjectureMap . 
+  ?cmap ?element ?status.
+  VALUES ?status {"fully-supported" "partially-supported" "unsupported"}
+  BIND (IF(?status = "fully-supported", 3, (IF(?status = "partially-supported", 2, 1))) As ?statusScore ) 
+} 
+                       
+GROUP BY ?cmap
 
 
 
