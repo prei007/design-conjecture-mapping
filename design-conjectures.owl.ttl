@@ -169,11 +169,23 @@ Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#DesignConjectureMap
 dcon:DesignConjectureMap rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty dcon:hasDesignElement ;
+                                           owl:someValuesFrom dcon:DesignElement
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty dcon:respondsTo ;
+                                           owl:someValuesFrom dcon:Challenge
+                                         ] ;
                          rdfs:comment "A learnining design about which we are going to make conjectures. It is addressing an instructional challenge"@en .
 
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#DesignElement
 dcon:DesignElement rdf:type owl:Class ;
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty dcon:triggersProcess ;
+                                     owl:someValuesFrom dcon:MediatingProcess
+                                   ] ;
                    owl:disjointWith dcon:DesignPrinciple ,
                                     dcon:MediatingProcess ,
                                     dcon:Outcome ;
@@ -220,6 +232,10 @@ dcon:Measure rdf:type owl:Class .
 
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#MediatingProcess
 dcon:MediatingProcess rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty dcon:hasOutcome ;
+                                        owl:someValuesFrom dcon:Outcome
+                                      ] ;
                       owl:disjointWith dcon:Outcome .
 
 
