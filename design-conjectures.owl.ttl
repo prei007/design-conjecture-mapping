@@ -108,6 +108,12 @@ This reflects the fact that a MediatingProcess often will describe the *interact
 In the future, it would be good to model the difference between necessary and sufficient relations. Also for the relation between MediatingProcess and Outcome."""^^xsd:string .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasBeliefStatus
+:hasBeliefStatus rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:range :BeliefStatus .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -131,7 +137,9 @@ dcon:creationTime rdf:type owl:DatatypeProperty ;
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
 <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> rdfs:domain dcon:Conjecture ;
-                                                                            rdfs:seeAlso "https://repository.isls.org/bitstream/1/1194/1/78-85.pdf"^^xsd:anyURI .
+                                                                            rdfs:seeAlso :BeliefStatus ,
+                                                                                         "https://repository.isls.org/bitstream/1/1194/1/78-85.pdf"^^xsd:anyURI ;
+                                                                            owl:deprecated "Better practice is via one of the enumerated classes of BeliefStatus."@en .
 
 
 ###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text
@@ -207,6 +215,7 @@ Suggested in: Wu, J., & Chen, V. D. T. (2018). Refining conjecture mapping for d
 dcon:DiscoursePractice rdf:type owl:Class ;
                        rdfs:subClassOf dcon:DesignElement ;
                        rdfs:comment "A DesignFeature that structures a discourse. For instance, the discourse  might follow a particular script."^^xsd:string ;
+                       rdfs:label "Discourse Practice"@en ;
                        rdfs:seeAlso "Roles and Responsibilities"^^xsd:string .
 
 
@@ -304,6 +313,45 @@ dcon:TaskStructure rdf:type owl:Class ;
 ###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Tool
 dcon:Tool rdf:type owl:Class ;
           rdfs:subClassOf dcon:DesignElement .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#AcceptedBeliefStatus
+:AcceptedBeliefStatus rdf:type owl:Class ;
+                      owl:equivalentClass [ rdf:type owl:Class ;
+                                            owl:oneOf ( :Accepted
+                                                        :Rejected
+                                                      )
+                                          ] ;
+                      rdfs:subClassOf :BeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#BeliefStatus
+:BeliefStatus rdf:type owl:Class ;
+              rdfs:comment "This class is used to model various belief status taxonomies. They get used in the relation hasBeliefStatus. Preferrably only one of them consistently in a single conjecture map.  This is also a hook for additional taxonomies, including numeric ones."@en ;
+              rdfs:seeAlso <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> ;
+              owl:backwardCompatibleWith "The modelling of beliefStatus via a data property"@en .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#ConfirmedBeliefStatus
+:ConfirmedBeliefStatus rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:oneOf ( :Confirmed
+                                                         :Disconfirmed
+                                                         :Unconfirmed
+                                                       )
+                                           ] ;
+                       rdfs:subClassOf :BeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#SupportedBeliefStatus
+:SupportedBeliefStatus rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:oneOf ( :FullySupported
+                                                         :PartiallySupported
+                                                         :Unsupported
+                                                       )
+                                           ] ;
+                       rdfs:subClassOf :BeliefStatus .
 
 
 #################################################################
@@ -534,6 +582,44 @@ dcon:_ResearchChallenge01 rdf:type owl:NamedIndividual ,
                           dcon:cmText "Ut sollicitudin molestie dolor, nec pulvinar nunc sagittis vitae. Nam sit amet ante eros"^^xsd:string .
 
 
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Accepted
+:Accepted rdf:type owl:NamedIndividual ,
+                   :AcceptedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Confirmed
+:Confirmed rdf:type owl:NamedIndividual ,
+                    :ConfirmedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Disconfirmed
+:Disconfirmed rdf:type owl:NamedIndividual ,
+                       :ConfirmedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#FullySupported
+:FullySupported rdf:type owl:NamedIndividual .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#PartiallySupported
+:PartiallySupported rdf:type owl:NamedIndividual ,
+                             :SupportedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Rejected
+:Rejected rdf:type owl:NamedIndividual ,
+                   :AcceptedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Unconfirmed
+:Unconfirmed rdf:type owl:NamedIndividual ,
+                      :ConfirmedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Unsupported
+:Unsupported rdf:type owl:NamedIndividual .
+
+
 #################################################################
 #    Annotations
 #################################################################
@@ -571,6 +657,14 @@ For instance, could work with the value of the data property beliefStatus."""^^x
                 dcon:RolesAndResponsibilities
                 dcon:TaskStructure
                 dcon:Tool
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AcceptedBeliefStatus
+                :ConfirmedBeliefStatus
+                :SupportedBeliefStatus
               )
 ] .
 
