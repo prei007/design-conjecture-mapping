@@ -1,0 +1,106 @@
+#################################################################
+#   Design Conjecture Map for Roland's Design
+#################################################################
+
+@prefix : <http://coolfutures.net/rdf/Design_Conjectures/dcon#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcon: <http://coolfutures.net/rdf/Design_Conjectures/dcon#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tma:  <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#> .
+
+
+:ROH a :DesignConjectureMap ;
+                :hasConjecture :PedagogyConjecture01 ;
+                :respondsTo :InstructionalChallenge01 ; 
+                :hasDesignElement :DE_CollaborativeInquiry ,
+                    :DE_Tangibles ,
+                    :DE_DigitalStoryTool .
+                    
+:PedagogyConjecture01 a :Conjecture ; 
+	tma:text "The top level conjecture" ;
+	tma:has_claim :Claim01 ;
+	tma:has_backing :Backing01 ;
+	tma:belief_status "unsupported" . 
+	
+:InstructionalChallenge01 a :InstructionalChallege ; 
+	:cmText "The challenge with children learning to write" . 
+	
+:DE_Tangibles a :Tool ;
+	:hasConjecture :Conjecture02 ; 
+	:hasPrinciple :Principle_EmbodiedInteraction ; 
+	:triggersProcess :MediatingProcess01 . 
+	
+
+:DE_DigitalStoryTool a :Tool ;
+	:hasConjecture :Conjecture03 ; 
+	:hasPrinciple :Principle_MultipleRepresentation ; 
+	:triggersProcess :MediatingProcess02 . 	
+	
+:DE_CollaborativeInquiry  a :DiscoursePractice ;
+	:hasConjecture :Conjecture04 ; 
+	:hasPrinciple :Principle_CollaborativeLearning ; 
+	:triggersProcess :MediatingProcess03, :MediatingProcess04 . 
+	
+:Principle_EmbodiedInteraction a :DesignPrinciple . 
+:Principle_MultipleRepresentation a :DesignPrinciple . 
+:Principle_CollaborativeLearning  a :DesignPrinciple . 
+
+	
+:Conjecture02 a :Conjecture ; 
+	tma:text "Conjecture about tangibles" ;
+	tma:has_claim :Claim02 ;
+	tma:has_backing "Theory of Embodied Cognitoin" ;
+	tma:belief_status "Supported" . 
+	
+:Conjecture03 a :Conjecture ; 
+	tma:text "Conjecture about digital story telling" ;
+	tma:has_claim :Claim03 ;
+	tma:has_backing "Theory of Learning from Multiple Representations" ;
+	tma:belief_status "unsupported" . 
+	
+:Conjecture04 a :Conjecture ; 
+	tma:text "Conjecture about collaborative inquiry" ;
+	tma:has_claim :Claim04 ;
+	tma:has_backing "Theories of collaborative learning" ;
+	tma:belief_status "unsupported" . 
+	
+:MediatingProcess01 a :Observable ; 
+	:text "Structuring and idea generation" ;
+	:hasOutcome :Outcome01 , :Outcome02 . 
+	
+:MediatingProcess02 a :Observable ; 
+	:text "Explorative inquiry into literature" ;
+	:hasOutcome :Outcome03 .
+	
+:MediatingProcess03 a :Observable ; 
+	:text "Generating ideas in coherence with genre" ;
+	:hasOutcome :Outcome04 .
+	
+:MediatingProcess04 a :Observable ; 
+	:text "Alternate writing practices" ;
+	:hasOutcome :Outcome05 .
+	
+:Outcome01 a :LearningOutcome ; 
+	:text "More ideas" . 
+	
+:Outcome02 a :LearningOutcome ; 
+	:text "Denser related stories" . 
+	
+:Outcome03 a :LearningOutcome ;
+	:text "Increased computational competence" . 
+	
+:Outcome04 a :LearningOutcome ; 
+	:text "Increased genre knowledge" . 
+	
+:Outcome05 a :LearningOutcome ; 
+	:text "Increased interest in writing" . 
+	
+
+	
+	
+
+
+	

@@ -1,0 +1,681 @@
+@prefix : <http://coolfutures.net/rdf/Design_Conjectures/dcon#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <http://coolfutures.net/rdf/Design_Conjectures/dcon#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.coolfutures.net/rdf/Design_Conjectures/dcon#> .
+
+<http://www.coolfutures.net/rdf/Design_Conjectures/dcon#> rdf:type owl:Ontology ;
+                                                           owl:imports <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#> ;
+                                                           <http://purl.org/dc/terms/creator> "Peter Reimann"^^xsd:string ;
+                                                           rdfs:comment "Initial work on an ontology for design conjecture mapping."@en ;
+                                                           owl:versionInfo "version 0.1"^^xsd:string .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/relation
+<http://purl.org/dc/terms/relation> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#argument
+:argument rdf:type owl:ObjectProperty .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#hasConjecture
+:hasConjecture rdf:type owl:ObjectProperty ;
+                   rdfs:comment "Any design element can have a conjecture attached."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#hasDesignElement
+:hasDesignElement rdf:type owl:ObjectProperty ;
+                      rdfs:domain :DesignConjectureMap ;
+                      rdfs:range :DesignElement ;
+                      rdfs:comment "A LearningDesign has a DesignFeature"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#hasMeasure
+:hasMeasure rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( :MediatingProcess
+                                            :Outcome
+                                          )
+                            ] .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#hasOutcome
+:hasOutcome rdf:type owl:ObjectProperty ;
+                rdfs:domain :MediatingProcess ;
+                rdfs:range :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#hasPrinciple
+:hasPrinciple rdf:type owl:ObjectProperty .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#necessaryForOutcome
+:necessaryForOutcome rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :hasOutcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#necessaryTrigger
+:necessaryTrigger rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :triggersProcess .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#refinedVersion
+:refinedVersion rdf:type owl:ObjectProperty ,
+                             owl:TransitiveProperty ;
+                    rdfs:comment "Conjectures and DesignElements can have refined versions. There can be a chain of such refinements."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#respondsTo
+:respondsTo rdf:type owl:ObjectProperty ;
+                rdfs:comment "For instance, a LearningDesign responds to an InstructionalChallenge"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#sufficientForOutcome
+:sufficientForOutcome rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf :hasOutcome ;
+                          rdf:type owl:FunctionalProperty .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#sufficientTrigger
+:sufficientTrigger rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :triggersProcess ;
+                       rdf:type owl:FunctionalProperty .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#triggersProcess
+:triggersProcess rdf:type owl:ObjectProperty ;
+                     rdfs:domain :DesignElement ;
+                     rdfs:range :MediatingProcess ;
+                     rdfs:comment """This relation is n:m in nature: one and the same design feature can trigger multiple MediatingProcesses, and a MediatingProcess may need multiple DesignFeatures. 
+
+This reflects the fact that a MediatingProcess often will describe the *interaction* of DesignFeatures. 
+
+In the future, it would be good to model the difference between necessary and sufficient relations. Also for the relation between MediatingProcess and Outcome."""^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#hasBeliefStatus
+:hasBeliefStatus rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:range :BeliefStatus .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#cmText
+:cmText rdf:type owl:DatatypeProperty ;
+            rdfs:comment "Any text content that goes with conjeture map elements. To be distinguised from targ:text."@en ;
+            rdfs:seeAlso "text in the toulmin arg ontology"@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#creationTime
+:creationTime rdf:type owl:DatatypeProperty ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:comment "The simplified date-time format is yyyy-mm-ddThh:mm:ss. For instace: 1994-01-25T21:32:52. It must be complete to be valid, that is, include seconds."^^xsd:string .
+
+
+###  http://purl.org/dc/terms/relation
+<http://purl.org/dc/terms/relation> rdf:type owl:DatatypeProperty ,
+                                             owl:FunctionalProperty .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> rdfs:domain :Conjecture ;
+                                                                            rdfs:seeAlso :BeliefStatus ,
+                                                                                         "https://repository.isls.org/bitstream/1/1194/1/78-85.pdf"^^xsd:anyURI ;
+                                                                            owl:deprecated "Better practice is via one of the enumerated classes of BeliefStatus."@en .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> rdf:type owl:FunctionalProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#AttitudeOutcome
+:AttitudeOutcome rdf:type owl:Class ;
+                     rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Challenge
+:Challenge rdf:type owl:Class ;
+               owl:disjointWith :DesignPrinciple .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Conjecture
+:Conjecture rdf:type owl:Class ;
+                rdfs:subClassOf <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#ToulminArgument> .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#ConstraintChallenge
+:ConstraintChallenge rdf:type owl:Class ;
+                         rdfs:subClassOf :Challenge ;
+                         rdfs:comment """Challenges arising from conditions that are not under the control of the designer, such as established assessment methods, mandated learning standards, lack of technology. This kind of challenge can be connected to any element and block the achievement of Mediating Process outcomes and intervention outcomes. 
+
+Source: Ma, G., & Van Aalst, J. (2014). Facilitating design research by mapping design research trajectories. Paper presented at the Proceedings of International Conference of the Learning Sciences, ICLS"""^^xsd:string ,
+                                      "Current Implementation: This kind of challenge gets modelled as Qualifier to a claim."^^xsd:string ;
+                         rdfs:seeAlso "https://doi.dx.org/10.22318/icls2014.78"^^xsd:anyURI .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#DesignConjectureMap
+:DesignConjectureMap rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasDesignElement ;
+                                           owl:someValuesFrom :DesignElement
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :respondsTo ;
+                                           owl:someValuesFrom :Challenge
+                                         ] ;
+                         rdfs:comment "A learnining design about which we are going to make conjectures. It is addressing an instructional challenge"@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#DesignElement
+:DesignElement rdf:type owl:Class ;
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty :triggersProcess ;
+                                     owl:someValuesFrom :MediatingProcess
+                                   ] ;
+                   owl:disjointWith :DesignPrinciple ,
+                                    :MediatingProcess ,
+                                    :Outcome ;
+                   rdfs:comment "DesignFeature is what Sandoval calls Embodiment. it is the hook to link to designs and design models. For the moment, the relation to design (models) outside of dcon can be established with dcterms:relation."@en .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#DesignPrinciple
+:DesignPrinciple rdf:type owl:Class ;
+                     owl:disjointWith :MediatingProcess ,
+                                      :Outcome ;
+                     rdfs:comment "Current implementation: The propert hasPrinciple links a DesignFeature to a DesignPrinciple."^^xsd:string ,
+                                  """Higher-order principles, or patterns, that reflect prior experience with learning desings.
+
+Suggested in: Wu, J., & Chen, V. D. T. (2018). Refining conjecture mapping for design-based research. Paper presented at the ICCE 2018 - 26th International Conference on Computers in Education, Main Conference Proceedings."""^^xsd:string ;
+                     rdfs:seeAlso "https://repository.nie.edu.sg/bitstream/10497/22839/1/ICCE-2018-767.pdf"^^xsd:anyURI .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#DiscoursePractice
+:DiscoursePractice rdf:type owl:Class ;
+                       rdfs:subClassOf :DesignElement ;
+                       rdfs:comment "A DesignFeature that structures a discourse. For instance, the discourse  might follow a particular script."^^xsd:string ;
+                       rdfs:label "Discourse Practice"@en ;
+                       rdfs:seeAlso "Roles and Responsibilities"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#InstructionalChallenge
+:InstructionalChallenge rdf:type owl:Class ;
+                            rdfs:subClassOf :Challenge ;
+                            rdfs:comment "This is the challenge that motivates the innovation, the new learning design. It typically is a challenge that learners face, one that does not have  satisfying solution yet."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#LearningOutcome
+:LearningOutcome rdf:type owl:Class ;
+                     rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Material
+:Material rdf:type owl:Class ;
+              rdfs:subClassOf :DesignElement .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Measure
+:Measure rdf:type owl:Class .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#MediatingProcess
+:MediatingProcess rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasOutcome ;
+                                        owl:someValuesFrom :Outcome
+                                      ] ;
+                      owl:disjointWith :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#MotivationOutcome
+:MotivationOutcome rdf:type owl:Class ;
+                       rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Observable
+:Observable rdf:type owl:Class ;
+                rdfs:subClassOf :MediatingProcess .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#ObservableBehavior
+:ObservableBehavior rdf:type owl:Class ;
+                        rdfs:subClassOf :Observable .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#ObservableInteraction
+:ObservableInteraction rdf:type owl:Class ;
+                           rdfs:subClassOf :Observable .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Observation
+:Observation rdf:type owl:Class ;
+                 rdfs:subClassOf :Measure .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Outcome
+:Outcome rdf:type owl:Class .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#ParticipantArtifact
+:ParticipantArtifact rdf:type owl:Class ;
+                         rdfs:subClassOf :MediatingProcess .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#ResearchChallenge
+:ResearchChallenge rdf:type owl:Class ;
+                       rdfs:subClassOf :Challenge ;
+                       rdfs:comment "The bigger research question that the design research addresses."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#RolesAndResponsibilities
+:RolesAndResponsibilities rdf:type owl:Class ;
+                              rdfs:subClassOf :DesignElement ;
+                              rdfs:comment "How participants, such as students and teachers, are expted to participate in tasks, the roles and responsibilities they take on. Different from pre-requisites, which are modelled as Qualifiers in the Conjectures."^^xsd:string ;
+                              rdfs:label "Roles and Responsibilities"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Scale
+:Scale rdf:type owl:Class ;
+           rdfs:subClassOf :Measure .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#SocialOutcome
+:SocialOutcome rdf:type owl:Class ;
+                   rdfs:subClassOf :Outcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#TaskStructure
+:TaskStructure rdf:type owl:Class ;
+                   rdfs:subClassOf :DesignElement .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#Tool
+:Tool rdf:type owl:Class ;
+          rdfs:subClassOf :DesignElement .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#AcceptedBeliefStatus
+:AcceptedBeliefStatus rdf:type owl:Class ;
+                      owl:equivalentClass [ rdf:type owl:Class ;
+                                            owl:oneOf ( :Accepted
+                                                        :Rejected
+                                                      )
+                                          ] ;
+                      rdfs:subClassOf :BeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#BeliefStatus
+:BeliefStatus rdf:type owl:Class ;
+              rdfs:comment "This class is used to model various belief status taxonomies. They get used in the relation hasBeliefStatus. Preferrably only one of them consistently in a single conjecture map.  This is also a hook for additional taxonomies, including numeric ones."@en ;
+              rdfs:seeAlso <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> ;
+              owl:backwardCompatibleWith "The modelling of beliefStatus via a data property"@en .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#ConfirmedBeliefStatus
+:ConfirmedBeliefStatus rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:oneOf ( :Confirmed
+                                                         :Disconfirmed
+                                                         :Unconfirmed
+                                                       )
+                                           ] ;
+                       rdfs:subClassOf :BeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#SupportedBeliefStatus
+:SupportedBeliefStatus rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:oneOf ( :FullySupported
+                                                         :PartiallySupported
+                                                         :Unsupported
+                                                       )
+                                           ] ;
+                       rdfs:subClassOf :BeliefStatus .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Backing01
+:_Backing01 rdf:type owl:NamedIndividual ,
+                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Backing> ;
+                <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "This study supports the claim."^^xsd:string ;
+                <http://purl.org/dc/terms/relation> "http://dx.doi.org/10.1007/978-3-030-00668-6_8"^^xsd:string ;
+                rdfs:comment "Backing from study"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Backing02
+:_Backing02 rdf:type owl:NamedIndividual ,
+                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Backing> ;
+                <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Teacher observations on similar designs"^^xsd:string ;
+                rdfs:comment "Backing from experience of teacher with similar designs"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Claim01
+:_Claim01 rdf:type owl:NamedIndividual ,
+                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> ;
+              <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Scientific argumentation requires appropriation of discursive practices of making, justifying, and evaluating claims."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Claim02
+:_Claim02 rdf:type owl:NamedIndividual ,
+                       <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Claim> .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Claim03
+:_Claim03 rdf:type owl:NamedIndividual ;
+              <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Keeping  a reflection journal will increase the number of reflections"^^xsd:string ;
+              rdfs:comment "some design claim"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Claim04
+:_Claim04 rdf:type owl:NamedIndividual ;
+              <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Writing helps with remembering content."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_ConceptMapApp01
+:_ConceptMapApp01 rdf:type owl:NamedIndividual ,
+                               :Tool ;
+                      :hasConjecture :_DesignConjecture02 ;
+                      :triggersProcess :_MedProcessWriting01 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_ConjectureMap01
+:_ConjectureMap01 rdf:type owl:NamedIndividual ,
+                               :DesignConjectureMap ;
+                      :hasConjecture :_PedagogyConjecture01 ;
+                      :hasDesignElement :_DesignElementCollaborativeInquiry ,
+                                            :_DesignElementReflectiveJournal ;
+                      :respondsTo :_InstructionalChallenge01 ,
+                                      :_ResearchChallenge01 ;
+                      :cmText "This design fosters scientific argumentation by collaboration and epistemic reflection. The *key new idea* is affording and scaffolding epistemic reflection."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_ConjectureMap02
+:_ConjectureMap02 rdf:type owl:NamedIndividual ,
+                               :DesignConjectureMap ;
+                      :hasConjecture :_PedagogyConjecture02 ;
+                      :hasDesignElement :_ConceptMapApp01 ;
+                      :respondsTo :_InstructionalChallenge02 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjecture02
+:_DesignConjecture02 rdf:type owl:NamedIndividual ,
+                                  :Conjecture ;
+                         <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjectureCollaborativeInquiry
+:_DesignConjectureCollaborativeInquiry rdf:type owl:NamedIndividual ,
+                                                    :Conjecture ;
+                                           :hasConjecture :_DesignConjectureCollaborativeInquiry ;
+                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignConjectureReflectiveJournal
+:_DesignConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
+                                                 :Conjecture ;
+                                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim03 ;
+                                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_MeasureOfReflexivity ;
+                                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasQualifier> :_QualifierFromTechConstraint ,
+                                                                                                                    :_QualifierWritingLiteracy ;
+                                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "fully-supported" ;
+                                        <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "The gist of the conjecture"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignElementCollaborativeInquiry
+:_DesignElementCollaborativeInquiry rdf:type owl:NamedIndividual ,
+                                                 :DiscoursePractice ;
+                                        :hasConjecture :_DesignConjectureCollaborativeInquiry ;
+                                        :triggersProcess :_MedProcessDiscussion01 ;
+                                        :cmText "Integer quis nulla in est ultrices condimentum in sit amet arcu."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_DesignElementReflectiveJournal
+:_DesignElementReflectiveJournal rdf:type owl:NamedIndividual ,
+                                              :DiscoursePractice ;
+                                     :hasConjecture :_DesignConjectureReflectiveJournal ;
+                                     :triggersProcess :_MediatingProcessReflectiveJournal ;
+                                     :cmText "How the design feature ReflectiveJournal will get implemented in this learning environment...link to the respective document, on Dropbox for instance."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_InstructionalChallenge01
+:_InstructionalChallenge01 rdf:type owl:NamedIndividual ,
+                                        :InstructionalChallenge ;
+                               :cmText "Scientific argumentation requires appropriation of discursive practices."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_InstructionalChallenge02
+:_InstructionalChallenge02 rdf:type owl:NamedIndividual ,
+                                        :InstructionalChallenge .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureCollaborativeInquiry
+:_LearningConjectureCollaborativeInquiry rdf:type owl:NamedIndividual ,
+                                                      :Conjecture ;
+                                             <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournal
+:_LearningConjectureReflectiveJournal rdf:type owl:NamedIndividual ,
+                                                   :Conjecture ;
+                                          :refinedVersion :_LearningConjectureReflectiveJournalv2 ;
+                                          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim04 ;
+                                          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasData> :_Outcome01 ;
+                                          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "partially-supported" ;
+                                          <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Maecenas tellus enim, tempus at risus nec, varius viverra diam."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournalv2
+:_LearningConjectureReflectiveJournalv2 rdf:type owl:NamedIndividual ,
+                                                     :Conjecture ;
+                                            :refinedVersion :_LearningConjectureReflectiveJournalv3 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_LearningConjectureReflectiveJournalv3
+:_LearningConjectureReflectiveJournalv3 rdf:type owl:NamedIndividual ,
+                                                     :Conjecture .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MeasureOfReflexivity
+:_MeasureOfReflexivity rdf:type owl:NamedIndividual ,
+                                    :Measure .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MeasurementScale01
+:_MeasurementScale01 rdf:type owl:NamedIndividual ,
+                                  :Scale .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MedProcessDiscussion01
+:_MedProcessDiscussion01 rdf:type owl:NamedIndividual ,
+                                      :Observable ;
+                             :hasConjecture :_LearningConjectureCollaborativeInquiry ;
+                             :hasOutcome :_Outcome02 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MedProcessWriting01
+:_MedProcessWriting01 rdf:type owl:NamedIndividual ,
+                                   :Observable ;
+                          :hasConjecture :_MediationConjecture02 ;
+                          :hasOutcome :_Outcome02 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MediatingProcessReflectiveJournal
+:_MediatingProcessReflectiveJournal rdf:type owl:NamedIndividual ,
+                                                 :ParticipantArtifact ;
+                                        :hasConjecture :_LearningConjectureReflectiveJournal ;
+                                        :hasMeasure :_MeasureOfReflexivity ;
+                                        :hasOutcome :_Outcome01 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_MediationConjecture02
+:_MediationConjecture02 rdf:type owl:NamedIndividual ,
+                                     :Conjecture ;
+                            <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "unsupported" .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Outcome01
+:_Outcome01 rdf:type owl:NamedIndividual ,
+                         :LearningOutcome ;
+                :hasMeasure :_MeasurementScale01 .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_Outcome02
+:_Outcome02 rdf:type owl:NamedIndividual ,
+                         :LearningOutcome .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_PedagogyConjecture01
+:_PedagogyConjecture01 rdf:type owl:NamedIndividual ,
+                                    :Conjecture ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasBacking> :_Backing01 ,
+                                                                                                     :_Backing02 ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#hasClaim> :_Claim01 ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "fully-supported" ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Phasellus eget ornare sem, eu tempus lacus"^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_PedagogyConjecture02
+:_PedagogyConjecture02 rdf:type owl:NamedIndividual ,
+                                    :Conjecture ;
+                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#beliefStatus> "unsupported" .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierFromTechConstraint
+:_QualifierFromTechConstraint rdf:type owl:NamedIndividual ,
+                                           :ConstraintChallenge ,
+                                           <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#Qualifier> ;
+                                  <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "May only work if student has a workstation at home."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_QualifierWritingLiteracy
+:_QualifierWritingLiteracy rdf:type owl:NamedIndividual ;
+                               <http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#text> "Only for students who can write on Level 5 as per national writing assessment."^^xsd:string .
+
+
+###  http://coolfutures.net/rdf/Design_Conjectures/dcon#_ResearchChallenge01
+:_ResearchChallenge01 rdf:type owl:NamedIndividual ,
+                                   :ResearchChallenge ;
+                          :cmText "Ut sollicitudin molestie dolor, nec pulvinar nunc sagittis vitae. Nam sit amet ante eros"^^xsd:string .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Accepted
+:Accepted rdf:type owl:NamedIndividual ,
+                   :AcceptedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Confirmed
+:Confirmed rdf:type owl:NamedIndividual ,
+                    :ConfirmedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Disconfirmed
+:Disconfirmed rdf:type owl:NamedIndividual ,
+                       :ConfirmedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#FullySupported
+:FullySupported rdf:type owl:NamedIndividual .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#PartiallySupported
+:PartiallySupported rdf:type owl:NamedIndividual ,
+                             :SupportedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Rejected
+:Rejected rdf:type owl:NamedIndividual ,
+                   :AcceptedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Unconfirmed
+:Unconfirmed rdf:type owl:NamedIndividual ,
+                      :ConfirmedBeliefStatus .
+
+
+###  http://www.coolfutures.net/rdf/Design_Conjectures/dcon#Unsupported
+:Unsupported rdf:type owl:NamedIndividual .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://purl.org/dc/terms/relation> rdfs:comment "Recommended practice is to identify the related resource by means of a URI. If this is not possible or feasible, a string conforming to a formal identification system may be provided"^^xsd:string .
+
+
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#QualifierApplication> rdfs:comment """A description how the Qualifier(s) related to a claim get evaluated and, where  multiple, combined and how this does affect the claim status. 
+
+For instance, could work with the value of the data property beliefStatus."""^^xsd:string .
+
+
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#_TArgument01> rdfs:comment "A Toulmin style argument, hence the T"^^xsd:string .
+
+
+<http://www.coolfutures.net/rdf/Design_Conjectures/toulminarg#creator> rdfs:comment "One or more people who have created or contributed."^^xsd:string .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AttitudeOutcome
+                :LearningOutcome
+                :MotivationOutcome
+                :SocialOutcome
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :DiscoursePractice
+                :Material
+                :RolesAndResponsibilities
+                :TaskStructure
+                :Tool
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AcceptedBeliefStatus
+                :ConfirmedBeliefStatus
+                :SupportedBeliefStatus
+              )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :_Claim01
+                        :_Claim02
+                        :_Claim03
+                        :_Claim04
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
